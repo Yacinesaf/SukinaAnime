@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { AppBar, Toolbar, Typography, Button, Grid, MenuItem, Menu, Avatar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import { getAnimes } from '../services/apiEndpoints'
 
 
 export default class Navbar extends Component {
@@ -10,6 +10,10 @@ export default class Navbar extends Component {
     this.state = {
       anchorEl: null
     }
+  }
+
+  componentDidMount() {
+    getAnimes()
   }
 
   openMenu = (e) => {
@@ -25,7 +29,7 @@ export default class Navbar extends Component {
         <Grid container justify='center'>
           <Grid item xs={10} sm={11}>
             <Toolbar style={{ justifyContent: 'space-between', padding: '10px 0px' }}>
-              <Typography style={{ fontFamily: 'Montez, cursive', fontWeight: 600 }} variant="h4">Sukina</Typography>
+              <Typography style={{ fontFamily: 'Fredoka One, cursive' }} variant={this.props.smDown ? 'h5' : "h4"}>Sukina</Typography>
               {this.props.isUserLogged ? <Avatar alt='avatar' /> :
                 this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :
                   <div style={{ display: 'flex', alignItems: 'center' }}>
