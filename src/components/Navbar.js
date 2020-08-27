@@ -28,7 +28,7 @@ export default class Navbar extends Component {
       <AppBar color={this.props.scrolledDown ? 'inherit' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none' }}>
         <Grid container justify='center'>
           <Grid item xs={10} sm={11}>
-            <Toolbar style={{ justifyContent: 'space-between', padding: '10px 0px' }}>
+            <Toolbar style={{ justifyContent: 'space-between', padding: this.props.smDown ? 0 : '10px 0px' }}>
               <Typography style={{ fontFamily: 'Fredoka One, cursive' }} variant={this.props.smDown ? 'h5' : "h4"}>Sukina</Typography>
               {this.props.isUserLogged ? <Avatar alt='avatar' /> :
                 this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :

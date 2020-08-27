@@ -2,7 +2,7 @@ import axios from 'axios'
 // import firebaseApp from '../firebase'
 
 const getAnimes = () => {
-  return axios.get('https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]=0').then(res => {
+  return axios.get('https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]=0').then(res => {
     console.log(res)
   })
 }
