@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { useLocation, useHistory } from "react-router-dom";
-import { BrowserRouter } from 'react-router-dom';
+import Animes from './components/Animes';
 
 const customTheme = createMuiTheme({
   overrides: {
@@ -36,6 +36,7 @@ function Routes() {
   return (
     <MuiThemeProvider theme={customTheme}>
       <Navbar scrolledDown={scrolledDown} smDown={smDown} />
+      <Route  exact path='/' render={(props) => <Animes {...props} smDown={smDown} />} />
     </MuiThemeProvider>
   );
 }

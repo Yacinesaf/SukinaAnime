@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const getAnimes = () => {
   return axios.get('https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]=0').then(res => {
-    console.log(res)
+    return res.data.data
   })
 }
 const getAnimesByGenra = (genre) => {
