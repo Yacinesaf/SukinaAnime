@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { setAnimes } from '../reduxStore/actions'
+import { setAnimes, setNextPage, setPrevPage } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
 import '../styles.css'
 import { Pagination, Skeleton } from '@material-ui/lab';
@@ -41,16 +41,10 @@ class Animes extends Component {
           {this.props.fetching ?
             <Skeleton style={{ borderRadius: 2 }} variant="text" animation='wave' width={520} height={40} />
             :
-            <Pagination page={this.state.currentPage} size='large' count={Math.round(Number(this.props.animeCount) / 12)} showFirstButton showLastButton
+            <Pagination color="secondary" page={this.state.currentPage} size='large' count={Math.ceil(Number(this.props.animeCount) / 12)}
               onChange={(event, page) => {
                 this.setState({ currentPage: page })
-                if (event.currentTarget.innerText) {
-                  if (event.currentTarget.innerText > this.state.currentPage) {
-                    this.props.setAnimes(Number(event.currentTarget.innerText), 'next')
-                  } else if (event.currentTarget.innerText < this.state.currentPage) {
-                    this.props.setAnimes(Number(event.currentTarget.innerText), 'prev')
-                  }
-                }
+                this.props.setAnimes(page)
               }}
             />
           }
@@ -64,7 +58,7 @@ class Animes extends Component {
 const mapStateToProps = state => ({
   animesList: state.animes.animes,
   fetching: state.animes.fetchingAnimes,
-  animeCount: state.animes.totalCount
+  animeCount: state.animes.totalCount,
 })
 
 export default connect(mapStateToProps, { setAnimes })(Animes)
