@@ -16,6 +16,13 @@ const getAnimeByName = (name) => {
 
 
 }
+const yeet = (name) => {
+  return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=1&filter[text]=The God of High School`).then(res => {
+    console.log(res);
+  })
+
+
+}
 
 
 // const getAnimesByGenra = (genre) => {
@@ -32,5 +39,5 @@ const getAnimeByName = (name) => {
 export {
   getAnimes,
   getAnimeByName,
-
+  yeet
 }

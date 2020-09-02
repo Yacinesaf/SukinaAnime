@@ -5,7 +5,7 @@ import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
 import '../styles.css'
 import { Pagination, Skeleton } from '@material-ui/lab';
-
+import {yeet} from '../services/apiEndpoints'
 class Animes extends Component {
   constructor() {
     super()
@@ -15,6 +15,7 @@ class Animes extends Component {
   }
   componentDidMount() {
     this.props.setAnimes()
+    yeet()
   }
 
   render() {
