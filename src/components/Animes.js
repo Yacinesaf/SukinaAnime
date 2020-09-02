@@ -31,7 +31,7 @@ class Animes extends Component {
               ))
               :
               this.props.animesList.map(x => (
-                <Grid onClick={() => { this.props.setSelectedAnime(x); this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`) }} key={x.id} item xs={12} md={3} style={{ padding: 20 }}>
+                <Grid onClick={() => { this.props.setSelectedAnime(x); this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`) }} key={x.id} item xs={12} md={3} style={{ padding: 20, cursor: 'pointer' }}>
                   <AnimeCard obj={x} />
                 </Grid>
               ))

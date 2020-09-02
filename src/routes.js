@@ -38,7 +38,7 @@ function Routes() {
   return (
     <MuiThemeProvider theme={customTheme}>
       <div className='bg'>
-        <Navbar scrolledDown={scrolledDown} smDown={smDown} location={location} />
+        <Navbar scrolledDown={scrolledDown} smDown={smDown} location={location} history={history} />
         <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} />} history={history} />
         <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown} location={location} />} />
       </div>

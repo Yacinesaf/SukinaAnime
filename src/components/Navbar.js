@@ -25,15 +25,15 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <AppBar color={this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'secondary' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none', transition : '0.2s ease-in' }}>
+      <AppBar color={this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'secondary' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none', transition: '0.2s ease-in' }}>
         <Grid container justify='center'>
           <Grid item xs={10} sm={11}>
             <Toolbar style={{ justifyContent: 'space-between', padding: this.props.smDown ? 0 : '10px 0px' }}>
-              <Typography style={{ fontFamily: 'Fredoka One, cursive' }} variant={this.props.smDown ? 'h5' : "h4"}>Sukina</Typography>
+              <Typography onClick={() => { this.props.history.push('/') }} style={{ fontFamily: 'Fredoka One, cursive', cursor : 'pointer' }} variant={this.props.smDown ? 'h5' : "h4"}>Sukina</Typography>
               {this.props.isUserLogged ? <Avatar alt='avatar' /> :
                 this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button color='inherit' style={{ marginRight: 20, fontSize: 16  }}>Login</Button>
+                    <Button color='inherit' style={{ marginRight: 20, fontSize: 16 }}>Login</Button>
                     <Button color='inherit' variant='outlined' style={{ color: this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'white' : '#00b248', fontSize: 16 }}>Sign up</Button>
                   </div>
               }
