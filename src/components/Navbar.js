@@ -25,7 +25,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <AppBar color={this.props.scrolledDown ? 'inherit' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none' }}>
+      <AppBar color={this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'secondary' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none', transition : '0.2s ease-in' }}>
         <Grid container justify='center'>
           <Grid item xs={10} sm={11}>
             <Toolbar style={{ justifyContent: 'space-between', padding: this.props.smDown ? 0 : '10px 0px' }}>
@@ -33,8 +33,8 @@ export default class Navbar extends Component {
               {this.props.isUserLogged ? <Avatar alt='avatar' /> :
                 this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button color='inherit' style={{ marginRight: 20, fontSize: 16 }}>Login</Button>
-                    <Button color='inherit' variant='outlined' style={{ color: '#00b248', fontSize: 16 }}>Sign up</Button>
+                    <Button color='inherit' style={{ marginRight: 20, fontSize: 16  }}>Login</Button>
+                    <Button color='inherit' variant='outlined' style={{ color: this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'white' : '#00b248', fontSize: 16 }}>Sign up</Button>
                   </div>
               }
 

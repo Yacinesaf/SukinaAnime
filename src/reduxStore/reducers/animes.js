@@ -11,8 +11,7 @@ export default function (state = initialState, action) {
     case 'SET_ANIMES':
       return { ...state, animes: action.payload }
     case 'SET_TOTAL_COUNT':
-      let arr = action.payload.split('=')
-      return { ...state, totalCount: arr[arr.length - 1] }
+      return { ...state, totalCount: action.payload }
     case 'SET_FETCHING_ANIMES':
       return { ...state, fetchingAnimes: action.payload }
 

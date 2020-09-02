@@ -9,6 +9,13 @@ const getAnimes = (pageNum) => {
 
 
 }
+const getAnimeByName = (name) => {
+  return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=1&filter[text]=${name}`).then(res => {
+    return res.data
+  })
+
+
+}
 
 
 // const getAnimesByGenra = (genre) => {
@@ -24,5 +31,6 @@ const getAnimes = (pageNum) => {
 
 export {
   getAnimes,
+  getAnimeByName,
 
 }

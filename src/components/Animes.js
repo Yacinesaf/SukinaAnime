@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
-import { setAnimes, setNextPage, setPrevPage } from '../reduxStore/actions'
+import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
 import '../styles.css'
 import { Pagination, Skeleton } from '@material-ui/lab';
@@ -19,7 +19,7 @@ class Animes extends Component {
 
   render() {
     return (
-      <Grid className='bg' container justify='center' style={{ padding: '60px 0px' }}>
+      <Grid container justify='center' style={{ padding: '60px 0px' }}>
         <Grid item xs={11}>
           <Grid container >
             {this.props.fetching ?
@@ -30,7 +30,7 @@ class Animes extends Component {
               ))
               :
               this.props.animesList.map(x => (
-                <Grid key={x.id} item xs={12} md={3} style={{ padding: 20 }}>
+                <Grid onClick={() => { this.props.setSelectedAnime(x); this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`) }} key={x.id} item xs={12} md={3} style={{ padding: 20 }}>
                   <AnimeCard obj={x} />
                 </Grid>
               ))
@@ -41,7 +41,7 @@ class Animes extends Component {
           {this.props.fetching ?
             <Skeleton style={{ borderRadius: 2 }} variant="text" animation='wave' width={520} height={40} />
             :
-            <Pagination color="secondary" page={this.state.currentPage} size='large' count={Math.ceil(Number(this.props.animeCount) / 12)}
+            <Pagination color="secondary" page={this.state.currentPage} size='large' showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
               onChange={(event, page) => {
                 this.setState({ currentPage: page })
                 this.props.setAnimes(page)
@@ -59,6 +59,7 @@ const mapStateToProps = state => ({
   animesList: state.animes.animes,
   fetching: state.animes.fetchingAnimes,
   animeCount: state.animes.totalCount,
+  sa: state.selectedAnime.selectedAnime
 })
 
-export default connect(mapStateToProps, { setAnimes })(Animes)
+export default connect(mapStateToProps, { setAnimes, setSelectedAnime })(Animes)
