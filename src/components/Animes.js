@@ -5,7 +5,7 @@ import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
 import '../styles.css'
 import { Pagination, Skeleton } from '@material-ui/lab';
-import {yeet} from '../services/apiEndpoints'
+import { yeet } from '../services/apiEndpoints'
 class Animes extends Component {
   constructor() {
     super()
@@ -15,7 +15,6 @@ class Animes extends Component {
   }
   componentDidMount() {
     this.props.setAnimes()
-    yeet()
   }
 
   render() {
@@ -42,7 +41,7 @@ class Animes extends Component {
           {this.props.fetching ?
             <Skeleton style={{ borderRadius: 2 }} variant="text" animation='wave' width={520} height={40} />
             :
-            <Pagination color="secondary" page={this.state.currentPage} size='large' showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
+            <Pagination color="secondary" page={this.state.currentPage} size={this.props.smDown ? 'small' : 'large'} showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
               onChange={(event, page) => {
                 this.setState({ currentPage: page })
                 this.props.setAnimes(page)

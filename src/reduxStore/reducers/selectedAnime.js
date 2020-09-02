@@ -1,6 +1,7 @@
 const initialState = {
   selectedAnime: null,
-  fetching: true
+  fetching: true,
+  relatedAnimes: []
 }
 
 export default function (state = initialState, action) {
@@ -8,7 +9,9 @@ export default function (state = initialState, action) {
     default: return state
 
     case 'SET_SELECTED_ANIME':
-      return { ...state, selectedAnime: action.payload[0] }
+      return { ...state, selectedAnime: action.payload }
+    case 'SET_RELATED_ANIMES':
+      return { ...state, relatedAnimes: action.payload }
     case 'SET_FETCHING':
       return { ...state, fetching: action.payload }
 

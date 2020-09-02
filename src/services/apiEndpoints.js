@@ -10,19 +10,22 @@ const getAnimes = (pageNum) => {
 
 }
 const getAnimeByName = (name) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=1&filter[text]=${name}`).then(res => {
+  return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=1&filter[text]=${name}`).then(res => {
     return res.data
   })
 
 
 }
-const yeet = (name) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=1&filter[text]=The God of High School`).then(res => {
-    console.log(res);
-  })
-
-
-}
+// const getSelectedAnimeCategorie = (categorie) => {
+//   return axios.get(`https://kitsu.io/api/edge/categories/${categorie}`).then(res => {
+//     return res
+//   })
+// }
+// const getyRelatedAnimes = (categorie) => {
+//   return axios.get(`https://kitsu.io/api/edge/anime?filter[categories]=${categorie}&page[limit]=4`).then(res => {
+//     return res
+//   })
+// }
 
 
 // const getAnimesByGenra = (genre) => {
@@ -39,5 +42,4 @@ const yeet = (name) => {
 export {
   getAnimes,
   getAnimeByName,
-  yeet
 }

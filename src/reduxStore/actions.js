@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -15,7 +15,15 @@ export const setSelectedAnime = (anime) => dispatch => {
 export const setSelectedAnimeByFetch = (name) => dispatch => {
   dispatch({ type: 'SET_FETCHING', payload: true })
   return getAnimeByName(name).then(res => {
-    dispatch({ type: 'SET_SELECTED_ANIME', payload: res.data })
+    dispatch({ type: 'SET_SELECTED_ANIME', payload: res.data[0] })
     dispatch({ type: 'SET_FETCHING', payload: false })
   })
 }
+
+// export const setRelatedAnimes = (link) => dispatch => {
+//   dispatch({ type: 'SET_FETCHING', payload: true })
+//   return getyRelatedAnimes(link).then(res => {
+//     dispatch({ type: 'SET_RELATED_ANIMES', payload: res.data })
+//     dispatch({ type: 'SET_FETCHING', payload: false })
+//   })
+// }

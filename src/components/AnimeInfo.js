@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Dialog, Typography, Paper } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { setSelectedAnimeByFetch } from '../reduxStore/actions'
 import loadingState from '../assets/loading.svg'
@@ -21,6 +21,7 @@ class AnimeInfo extends Component {
 
   render() {
     console.log(this.props.anime);
+    console.log(this.props.related);
     return (
       <div>
         {this.props.anime ?
@@ -56,22 +57,31 @@ class AnimeInfo extends Component {
                 </Grid>
                 <Grid item xs={10} style={{ paddingLeft: 40, position: 'relative' }}>
                   <div>
-                    <Typography variant='h3' style={{ fontWeight: 600, padding: 10 }}>{this.props.anime.attributes.titles.en}</Typography>
-                    <Typography variant='h3' style={{ fontWeight: 600, padding: 10 }}>{this.props.anime.attributes.titles.en_jp}</Typography>
+                    <Typography variant='h3' style={{ fontWeight: 600, padding: 10 }}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</Typography>
                     <div style={{ display: 'flex', alignItems: 'center', paddingTop: 5 }}>
                       <Typography variant='h4' style={{ fontWeight: 600, padding: 10 }}>{this.rateToFive(this.props.anime.attributes.averageRating)}</Typography>
                       <GradeIcon fontSize='large' style={{ color: '#fbc02d' }} />
                     </div>
                   </div>
-                  <div style={{ paddingTop: 25 }}>
+                  <div style={{ paddingTop: 100 }}>
                     <Typography variant='h4' style={{ fontWeight: 600, padding: 10 }}>Synopsis</Typography>
                     <Typography variant='h6' style={{ padding: 10 }}>{this.props.anime.attributes.description}</Typography>
                   </div>
-                  <div style={{ position: 'absolute', top: 0, right: 30 }}>
+                  <div style={{ position: 'absolute', top: 0, right: 0 }}>
                     <iframe title='trialer' id="ytplayer" width="480" height="270"
                       allow='autoplay' src={`https://www.youtube.com/embed/${this.props.anime.attributes.youtubeVideoId}`}
                       frameBorder="0"></iframe>
                   </div>
+                  <Grid container style={{ padding: '40px 10px' }}>
+                    <Typography variant='h5' style={{ fontWeight: 600 }}>Related Animes</Typography>
+                    {this.props.fetching ? null :
+                      this.props.related.map((x, i) => (
+                        <Grid item xs={3} style={{ paddingRight: 10 }}>
+                          {/*                          <img alt src={}  width={'100%'} height={200} />*/}
+                        </Grid>
+                      ))
+                    }
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -88,8 +98,9 @@ class AnimeInfo extends Component {
 
 const mapStateToProps = state => ({
   anime: state.selectedAnime.selectedAnime,
+  related: state.selectedAnime.relatedAnimes,
+  fetching: state.selectedAnime.fetching,
+
 })
 
 export default connect(mapStateToProps, { setSelectedAnimeByFetch })(AnimeInfo)
-
-// }
