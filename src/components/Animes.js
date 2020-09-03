@@ -3,9 +3,11 @@ import { Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
-import '../styles.css'
 import { Pagination, Skeleton } from '@material-ui/lab';
-import { yeet } from '../services/apiEndpoints'
+import '../css/styles.css'
+
+
+
 class Animes extends Component {
   constructor() {
     super()

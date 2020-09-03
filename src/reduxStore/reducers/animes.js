@@ -1,7 +1,8 @@
 const initialState = {
   animes: [],
   totalCount: null,
-  fetchingAnimes: true
+  fetchingAnimes: true,
+  currentPage : null,
 }
 
 export default function (state = initialState, action) {
@@ -14,6 +15,8 @@ export default function (state = initialState, action) {
       return { ...state, totalCount: action.payload }
     case 'SET_FETCHING_ANIMES':
       return { ...state, fetchingAnimes: action.payload }
+    case 'SET_CURRENT_PAGE':
+      return { ...state, currentPage: action.payload }
 
   }
 }

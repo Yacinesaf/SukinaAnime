@@ -1,19 +1,40 @@
 import React, { Component } from 'react'
 import { AppBar, Toolbar, Typography, Button, Grid, MenuItem, Menu, Avatar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { getAnimes } from '../services/apiEndpoints'
+import '../css/navbar.css'
 
-
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor() {
     super()
     this.state = {
+      scrolled: false,
+      menuIsClicked: false,
       anchorEl: null
     }
   }
-
   componentDidMount() {
-    getAnimes()
+    var h1 = parseInt(this.refs.header.offsetHeight);
+    window.addEventListener('scroll', this._calcScroll.bind(this, h1));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._calcScroll)
+  }
+
+
+  _calcScroll(h1) {
+    var _window = window;
+    var heightDiff = parseInt(h1);
+    var scrollPos = _window.scrollY;
+    if (scrollPos > heightDiff - 100) {
+      this.setState({
+        scrolled: true,
+      });
+    } else {
+      this.setState({
+        scrolled: false,
+      });
+    }
   }
 
   openMenu = (e) => {
@@ -25,21 +46,18 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <AppBar color={this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'secondary' : 'transparent'} position="sticky" style={{ boxShadow: this.props.scrolledDown ? '0 2px 6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.13)' : 'none', transition: '0.2s ease-in' }}>
-        <Grid container justify='center'>
-          <Grid item xs={10} sm={11}>
-            <Toolbar style={{ justifyContent: 'space-between', padding: this.props.smDown ? 0 : '0px 0px' }}>
-              <Typography onClick={() => { this.props.history.push('/') }} style={{ fontFamily: 'Fredoka One, cursive', cursor : 'pointer' }} variant={this.props.smDown ? 'h5' : "h4"}>Sukina</Typography>
-              {this.props.isUserLogged ? <Avatar alt='avatar' /> :
-                this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Button color='inherit' style={{ marginRight: 20, fontSize: 16 }}>Login</Button>
-                    <Button color='inherit' variant='outlined' style={{ color: this.props.scrolledDown || this.props.location.pathname !== ['/'] ? 'white' : '#00b248', fontSize: 16 }}>Sign up</Button>
-                  </div>
-              }
-
-            </Toolbar>
-          </Grid>
+      <div ref='header' className='navbar'>
+        <div className="container justify-content-center" >
+          <div className='row col-xs-10 col-sm-11 justify-content-between'>
+            <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
+            {this.props.isUserLogged ? <Avatar alt='avatar' /> :
+              this.props.smDown ? <MenuIcon onClick={this.openMenu} /> :
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div className='login bold_text'>Login</div>
+                  <div className='signup bold_text'>Sign up</div>
+                </div>
+            }
+          </div>
           <Menu
             style={{}}
             anchorEl={this.state.anchorEl}
@@ -64,8 +82,10 @@ export default class Navbar extends Component {
               <Typography>Sign up</Typography>
             </MenuItem>
           </Menu>
-        </Grid>
-      </AppBar>
+        </div>
+      </div>
     )
   }
 }
+
+export default Navbar;

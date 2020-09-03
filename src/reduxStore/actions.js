@@ -12,6 +12,11 @@ export const setAnimes = (pageNum) => dispatch => {
 export const setSelectedAnime = (anime) => dispatch => {
   dispatch({ type: 'SET_SELECTED_ANIME', payload: anime })
 }
+
+export const setCurrentPage = (page) => dispatch => {
+  dispatch({ type: 'SET_CURRENT_PAGE', payload: page })
+}
+
 export const setSelectedAnimeByFetch = (name) => dispatch => {
   dispatch({ type: 'SET_FETCHING', payload: true })
   return getAnimeByName(name).then(res => {

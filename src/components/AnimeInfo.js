@@ -3,7 +3,6 @@ import { Grid, Typography } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { setSelectedAnimeByFetch } from '../reduxStore/actions'
 import loadingState from '../assets/loading.svg'
-import '../styles.css'
 import GradeIcon from '@material-ui/icons/Grade';
 import placeHolder from '../assets/noImageHolder.jpg'
 

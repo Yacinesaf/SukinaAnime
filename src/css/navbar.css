@@ -1,0 +1,32 @@
+.navbar {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.13);
+  transition: 0.2s ease-in;
+  background-color: #5f27cd;
+}
+
+.site_name {
+  font-family: Fredoka One, cursive;
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
+}
+
+.signup {
+  color: white;
+  padding: 5px 10px;
+  border: 2px solid white;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size : 16px;
+  
+}
+
+.login {
+  margin-right: 25px;
+  color: white;
+  background-color: transparent;
+  cursor: pointer;
+  font-size : 16px;
+  
+}
