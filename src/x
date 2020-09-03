@@ -1,0 +1,25 @@
+let obj = {
+  xs : false,
+  sm : false,
+  md : false,
+  lg : false,
+  xl : false,
+}
+
+function mediaqueries (breakpoint) {
+if ($(window).width(<576px) < ) {
+    this.setState({xs : true})
+}
+else if ($(window).width() >= 576 &&  $(window).width() <= 768) {
+    this.setState({sm : true})
+}
+else if ($(window).width() >= 768 &&  $(window).width() <= 992) {
+    this.setState({md : true})
+}
+else if ($(window).width() > 992 &&  $(window).width() <= 1200) {
+    this.setState({lg : true})
+}
+else  {
+    this.setState({xl : true})
+}
+}
