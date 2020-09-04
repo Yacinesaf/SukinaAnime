@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
-import { Pagination, Skeleton } from '@material-ui/lab';
+import { Pagination } from '@material-ui/lab';
 import '../css/styles.css'
+import '../css/animes.css'
 
 
 
@@ -21,27 +21,27 @@ class Animes extends Component {
 
   render() {
     return (
-      <Grid container justify='center' style={{ padding: '60px 0px' }}>
-        <Grid item xs={11}>
-          <Grid container >
+      <div className='row justify-content-center' style={{ padding: '130px 0px 60px' }}>
+        <div className='col-12 col-md-11' style={{ margin: '0px -20px' }}>
+          <div className='row justify-content-center'>
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
-                <Grid key={i} item xs={12} md={3} style={{ padding: 20 }}>
-                  <Skeleton style={{ borderRadius: 10 }} variant="rect" animation='wave' width={'100%'} height={300} />
-                </Grid>
+                <div className='col-12 col-md-3' key={i} style={{ padding: 20 }}>
+                  <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 300 }} />
+                </div>
               ))
               :
               this.props.animesList.map(x => (
-                <Grid onClick={() => { this.props.setSelectedAnime(x); this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`) }} key={x.id} item xs={12} md={3} style={{ padding: 20, cursor: 'pointer' }}>
+                <div className='col-12 col-md-3' onClick={() => { this.props.setSelectedAnime(x); this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`) }} key={x.id} style={{ padding: 20, cursor: 'pointer' }}>
                   <AnimeCard obj={x} />
-                </Grid>
+                </div>
               ))
             }
-          </Grid>
-        </Grid>
-        <Grid item xs={11} style={{ paddingTop: 30, display: 'flex', justifyContent: 'center' }}>
+          </div>
+        </div>
+        <div className='col-11 d-flex justify-content-center' style={{ paddingTop: 30 }}>
           {this.props.fetching ?
-            <Skeleton style={{ borderRadius: 2 }} variant="text" animation='wave' width={520} height={40} />
+            <div className='skeleton-box' style={{ borderRadius: 2, width: 520, height: 40 }} />
             :
             <Pagination color="secondary" page={this.state.currentPage} size={this.props.smDown ? 'small' : 'large'} showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
               onChange={(event, page) => {
@@ -50,8 +50,9 @@ class Animes extends Component {
               }}
             />
           }
-        </Grid>
-      </Grid>
+
+        </div>
+      </div>
     )
   }
 }

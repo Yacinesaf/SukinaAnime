@@ -21,7 +21,6 @@ class Navbar extends Component {
           {this.props.isUserLogged ? <Avatar alt='avatar' /> :
             this.props.smDown ?
               <button
-                onClick={(e) => { this.setState({ menuIsClicked: !this.state.menuIsClicked }) }}
                 className={this.state.menuIsClicked ? "hamburger hamburger--spin is-active menubtn" : "hamburger hamburger--spin menubtn"}
                 type="button">
                 <span className="hamburger-box">
@@ -34,8 +33,6 @@ class Navbar extends Component {
                 <div className='signup bold_text'>Sign up</div>
               </div>
           }
-          <div className='col-auto p-0' >
-          </div>
         </div>
       </div>
     )
