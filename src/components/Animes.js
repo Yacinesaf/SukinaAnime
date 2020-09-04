@@ -21,8 +21,8 @@ class Animes extends Component {
 
   render() {
     return (
-      <div className='row justify-content-center' style={{ padding: '130px 0px 60px' }}>
-        <div className='col-12 col-md-11' style={{ margin: '0px -20px' }}>
+      <div className='row justify-content-center mx-0 px-0' style={{ padding: '130px 0px 60px' }}>
+        <div className='col-12 col-md-11' style={{ margin: '0px -5px' }}>
           <div className='row justify-content-center'>
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
@@ -40,16 +40,13 @@ class Animes extends Component {
           </div>
         </div>
         <div className='col-11 d-flex justify-content-center' style={{ paddingTop: 30 }}>
-          {this.props.fetching ?
-            <div className='skeleton-box' style={{ borderRadius: 2, width: 520, height: 40 }} />
-            :
-            <Pagination color="secondary" page={this.state.currentPage} size={this.props.smDown ? 'small' : 'large'} showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
-              onChange={(event, page) => {
-                this.setState({ currentPage: page })
-                this.props.setAnimes(page)
-              }}
-            />
-          }
+
+          <Pagination color="secondary" page={this.state.currentPage} size={this.props.smDown ? 'small' : 'large'} showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
+            onChange={(event, page) => {
+              this.setState({ currentPage: page })
+              this.props.setAnimes(page)
+            }}
+          />
 
         </div>
       </div>

@@ -16,7 +16,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className="justify-content-center navbar" >
-        <div className='row col-xs-10 col-sm-11 justify-content-between'>
+        <div className='row col-xs-10 col-sm-11 justify-content-between mx-0 px-0'>
           <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
           {this.props.isUserLogged ? <Avatar alt='avatar' /> :
             this.props.smDown ?
