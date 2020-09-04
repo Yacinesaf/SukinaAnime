@@ -1,0 +1,34 @@
+.info {
+  padding: 10px 0px;
+  border-bottom: 1px solid grey;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.infoLast {
+  padding: 10px 0px;
+  font-size: 1.25rem;
+  color: white;
+}
+.anime-title {
+  color : white;
+  padding: 10px;
+  font-size: 2.5rem;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  max-width: 690px;
+}
+
+.subtitle {
+  color : white;
+  padding: 10px;
+  font-size: 1.75rem;
+}
+
+.synopsis {
+  color: white;
+  padding: 10px;
+  font-size: 1.3rem;
+}
+

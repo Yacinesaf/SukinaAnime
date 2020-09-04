@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Grid, Typography } from '@material-ui/core'
 import { connect } from 'react-redux'
 import { setSelectedAnimeByFetch } from '../reduxStore/actions'
 import loadingState from '../assets/loading.svg'
 import GradeIcon from '@material-ui/icons/Grade';
 import placeHolder from '../assets/noImageHolder.jpg'
+import '../css/animeInfo.css'
+import '../css/styles.css'
 
 class AnimeInfo extends Component {
   componentDidMount() {
@@ -19,13 +20,13 @@ class AnimeInfo extends Component {
   }
 
   render() {
-    console.log(this.props.anime);
-    console.log(this.props.related);
+    // console.log(this.props.anime);
+    // console.log(this.props.related);
     return (
       <div>
         {this.props.anime ?
-          <Grid container justify='center'>
-            <Grid item xs={12}>
+          <div className='row justify-content-center'>
+            <div className='col-12'>
               <div style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -37,54 +38,54 @@ class AnimeInfo extends Component {
                 height: 350,
                 boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
               }} />
-            </Grid>
-            <Grid item style={{ position: 'relative', display: 'flex', paddingTop: 30 }} xs={11}>
-              <Grid container justify='center'>
-                <Grid item xs={2} style={{ transform: 'translateY(-120px)' }}>
+            </div>
+            <div className='col-11 d-flex' style={{ position: 'relative', paddingTop: 30 }}>
+              <div className='row justify-content-center'>
+                <div className='col-2' style={{ transform: 'translateY(-120px)' }}>
                   <img alt='poster' src={this.props.anime.attributes.posterImage.small} style={{ boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }} />
                   <div style={{ padding: '30px 0px' }}>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength} min</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Status :</strong> {this.props.anime.attributes.status}</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</Typography>
-                    <Typography style={{ padding: '10px 0px', borderBottom: '1px solid grey' }} variant='h6'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</Typography>
-                    <Typography style={{ padding: '10px 0px' }} variant='h6'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</Typography>
-                    {this.props.anime.attributes.nsfw ? <Typography variant='h6' style={{ fontWeight: 600 }}>NSFW</Typography> : null}
+                    <p className='info'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
+                    <p className='info'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength} min</p>
+                    <p className='info'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
+                    <p className='info'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</p>
+                    <p className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</p>
+                    <p className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</p>
+                    <p className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</p>
+                    <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
+                    {this.props.anime.attributes.nsfw ? <p className='info bold_text'>NSFW</p> : null}
                   </div>
-                </Grid>
-                <Grid item xs={10} style={{ paddingLeft: 40, position: 'relative' }}>
-                  <div>
-                    <Typography variant='h3' style={{ fontWeight: 600, padding: 10 }}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</Typography>
-                    <div style={{ display: 'flex', alignItems: 'center', paddingTop: 5 }}>
-                      <Typography variant='h4' style={{ fontWeight: 600, padding: 10 }}>{this.rateToFive(this.props.anime.attributes.averageRating)}</Typography>
-                      <GradeIcon fontSize='large' style={{ color: '#fbc02d' }} />
+                </div>
+                <div className='col-10' style={{ paddingLeft: 40, position: 'relative' }}>
+                  <div className='d-flex justify-content-between'>
+                    <div>
+                      <p className='anime-title bold_text'>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', paddingTop: 5 }}>
+                        <p className='anime-title bold_text'>{this.rateToFive(this.props.anime.attributes.averageRating)}</p>
+                        <GradeIcon fontSize='large' style={{ color: '#fbc02d' }} />
+                      </div>
                     </div>
-                  </div>
-                  <div style={{ paddingTop: 100 }}>
-                    <Typography variant='h4' style={{ fontWeight: 600, padding: 10 }}>Synopsis</Typography>
-                    <Typography variant='h6' style={{ padding: 10 }}>{this.props.anime.attributes.description}</Typography>
-                  </div>
-                  <div style={{ position: 'absolute', top: 0, right: 0 }}>
                     <iframe title='trialer' id="ytplayer" width="480" height="270"
                       allow='autoplay' src={`https://www.youtube.com/embed/${this.props.anime.attributes.youtubeVideoId}`}
                       frameBorder="0"></iframe>
                   </div>
-                  <Grid container style={{ padding: '40px 10px' }}>
-                    <Typography variant='h5' style={{ fontWeight: 600 }}>Related Animes</Typography>
+                  <div style={{ paddingTop: 30 }}>
+                    <p className='subtitle bold_text'>Synopsis</p>
+                    <p className='synopsis'>{this.props.anime.attributes.description}</p>
+                  </div>
+                  <div className='row' style={{ padding: '40px 10px' }}>
+                    <p className='subtitle bold_text'>Related Animes</p>
                     {this.props.fetching ? null :
                       this.props.related.map((x, i) => (
-                        <Grid item xs={3} style={{ paddingRight: 10 }}>
+                        <div className='col-3' style={{ paddingRight: 10 }}>
                           {/*                          <img alt src={}  width={'100%'} height={200} />*/}
-                        </Grid>
+                        </div>
                       ))
                     }
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           :
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img alt='loading' src={loadingState} style={{ transform: 'scale(0.6)' }} />
