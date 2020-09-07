@@ -8,6 +8,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { useLocation, useHistory } from "react-router-dom";
 import Animes from './components/Animes';
 import AnimeInfo from './components/AnimeInfo'
+import SignPage from './components/SignPage';
 
 
 const customTheme = createMuiTheme({
@@ -39,11 +40,11 @@ function Routes() {
     <MuiThemeProvider theme={customTheme}>
       <div className='bg'>
         <Navbar scrolledDown={scrolledDown} smDown={smDown} location={location} history={history} />
-        <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} />} history={history} />
-        <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown} location={location} />} />
+        <SignPage />
       </div>
     </MuiThemeProvider>
   );
 }
-
+// <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} />} history={history} />
+// <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown} location={location} />} />
 export default Routes;

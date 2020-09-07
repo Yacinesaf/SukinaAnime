@@ -19,12 +19,17 @@ class Animes extends Component {
     this.props.setAnimes()
   }
 
+  pagination = (page) => {
+    let arr = [];
+    if(page -1 <= 0){}
+  }
+
   render() {
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ padding: '130px 0px 60px' }}>
         <div className='col-12 col-md-11' style={{ margin: '0px -5px' }}>
           <div className='row justify-content-center'>
-            {true?
+            {true ?
               Array(12).fill(0).map((x, i) => (
                 <div className='col-12 col-md-3' key={i} style={{ padding: 20 }}>
                   <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 300 }} />
