@@ -3,28 +3,32 @@ import carousel1 from '../assets/lf3zl98yy7011.jpg'
 import carousel2 from '../assets/shingeki-no-kyojin-poster.jpg'
 import carousel3 from '../assets/poster-780.jpg'
 import '../css/signPage.css'
+import '../css/styles.css'
 
 
 export default class SignPage extends Component {
+  constructor() {
+    super()
+    this.state = {
+      inputClicked: false
+    }
+  }
   render() {
     return (
-      <div className='row justify-content-center mx-0 px-0'>
-        <div className='col-xs-12 col-md-6 p-5 d-flex  align-items-center'>
-          <form>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+      <div onClick={(e) => {
+        if (e.currentTarget.id !== 'email' || e.currentTarget.id !== 'password') {
+          this.setState({inputClicked : false})
+        }
+      }} className='row justify-content-center mx-0 px-0'>
+        <div className='col-xs-12 col-md-6 d-flex align-items-center' style={{ padding: '0px 100px' }}>
+          <form style={{ width: 'inherit' }}>
+            <label htmlFor='email' className='py-3 field-title'>Email adress</label>
+            <input id='email' className='inputfield' type='text' placeholder='Enter Email' />
+            <label htmlFor='password' className='py-3 field-title'>Password</label>
+            <input id='password' className='inputfield mb-4' type='password' placeholder='Password' />
+            <div className='button mt-4'>
+              {this.props.location.pathname === 'login' ? 'Login' : 'Sign up'}
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-            </div>
-            <div className="form-group form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-              <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </div>
         <div className='col-md-6 d-none d-md-block p-0'>

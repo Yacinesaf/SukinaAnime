@@ -6,6 +6,22 @@
   height: 100vh;
 }
 
-input {
+.inputfield {
+  padding : 10px 15px;
   width: 100%;
+}
+
+.button {
+  padding: 12px 20px;
+  background-color: #642adb;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.field-title {
+  font-size: 1.5rem;
+  color: white;
 }

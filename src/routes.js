@@ -39,12 +39,11 @@ function Routes() {
   return (
     <MuiThemeProvider theme={customTheme}>
       <div className='bg'>
-        <Navbar scrolledDown={scrolledDown} smDown={smDown} location={location} history={history} />
-        <SignPage />
+        <Route exact path='/' render={(props) => <SignPage {...props} smDown={smDown} location={location} />}  />
       </div>
     </MuiThemeProvider>
   );
 }
-// <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} />} history={history} />
+// <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} history={history} />} />
 // <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown} location={location} />} />
 export default Routes;
