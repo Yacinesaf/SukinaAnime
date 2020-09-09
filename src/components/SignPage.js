@@ -10,17 +10,12 @@ export default class SignPage extends Component {
   constructor() {
     super()
     this.state = {
-      inputClicked: false
     }
   }
   render() {
     return (
-      <div onClick={(e) => {
-        if (e.currentTarget.id !== 'email' || e.currentTarget.id !== 'password') {
-          this.setState({inputClicked : false})
-        }
-      }} className='row justify-content-center mx-0 px-0'>
-        <div className='col-xs-12 col-md-6 d-flex align-items-center' style={{ padding: '0px 100px' }}>
+      <div className='row justify-content-center mx-0 px-0'>
+        <div className='col-xs-11 col-md-6 d-flex align-items-center' style={{ padding: this.props.smDown ? 0 : '0px 100px' }}>
           <form style={{ width: 'inherit' }}>
             <label htmlFor='email' className='py-3 field-title'>Email adress</label>
             <input id='email' className='inputfield' type='text' placeholder='Enter Email' />

@@ -10,7 +10,7 @@ function mediaqueries (breakpoint) {
 if ($(window).width(<576px) < ) {
     this.setState({xs : true})
 }
-else if ($(window).width() >= 576 &&  $(window).width() <= 768) {
+else if ($(window).width() >= 576 &&  ) {
     this.setState({sm : true})
 }
 else if ($(window).width() >= 768 &&  $(window).width() <= 992) {
@@ -22,4 +22,9 @@ else if ($(window).width() > 992 &&  $(window).width() <= 1200) {
 else  {
     this.setState({xl : true})
 }
+}
+
+
+if($(window).width() <= 768) {
+  setSmDown(true)
 }

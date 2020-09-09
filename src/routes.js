@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router'
 import Navbar from './components/Navbar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -26,6 +26,25 @@ const customTheme = createMuiTheme({
   }
 });
 
+// Hook
+function useWindowSize() {
+  const [windowWidth, setWindowWidth] = useState(undefined);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowWidth;
+}
+
 
 
 
@@ -34,12 +53,21 @@ function Routes() {
   const history = useHistory();
   const scrolledDown = useScrollTrigger({ threshold: 50, disableHysteresis: true });
   const theme = useTheme();
-  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+  // const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const window = useWindowSize();
+  const smDown = (width) => {
+    if (width <= 768) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   return (
     <MuiThemeProvider theme={customTheme}>
       <div className='bg'>
-        <Route exact path='/' render={(props) => <SignPage {...props} smDown={smDown} location={location} />}  />
+        <Route exact path='/' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} window={window} />} />
       </div>
     </MuiThemeProvider>
   );
