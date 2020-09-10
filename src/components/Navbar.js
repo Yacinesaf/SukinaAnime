@@ -15,28 +15,31 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div className="justify-content-center navbar">
-        <div className='row col-10 col-md-11 justify-content-between mx-0 px-0 align-items-center'>
-          <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
-          {this.props.isUserLogged ? <Avatar alt='avatar' /> :
-            this.props.smDown ?
-              <button
-                onClick={() => { this.setState({ menuIsClicked: !this.state.menuIsClicked }) }}
-                className={this.state.menuIsClicked ? "hamburger hamburger--spin is-active menubtn" : "hamburger hamburger--spin menubtn"}
-                type="button">
-                <span className="hamburger-box">
-                  <span className="hamburger-inner" />
-                </span>
-              </button>
-              :
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div className='login bold_text'>Login</div>
-                <div className='signup bold_text'>Sign up</div>
-              </div>
-          }
+      <div className='container-fluid px-0 mx-0'>
+        <div className="row justify-content-center navbar px-0 mx-0">
+          <div className='col-10 col-md-11 d-flex justify-content-between align-items-center px-0 mx-0'>
+            <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
+            {this.props.isUserLogged ? <Avatar alt='avatar' /> :
+              this.props.smDown ?
+                <button
+                  style={{ paddingTop: 5 }}
+                  onClick={() => { this.setState({ menuIsClicked: !this.state.menuIsClicked }) }}
+                  className={this.state.menuIsClicked ? "hamburger hamburger--spin is-active menubtn" : "hamburger hamburger--spin menubtn"}
+                  type="button">
+                  <span className="hamburger-box">
+                    <span className="hamburger-inner" />
+                  </span>
+                </button>
+                :
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div className='login bold_text'>Login</div>
+                  <div className='signup bold_text'>Sign up</div>
+                </div>
+            }
+          </div>
         </div>
         {this.props.smDown ?
-          <div className={`col-10 col-md-11 mx-0 px-0 text-center menu py-2 ${this.state.menuIsClicked ? 'd-block' : 'd-none'}`}>
+          <div className={`d-flex flex-column align-items-center w-100 py-4 ${this.state.menuIsClicked ? 'menuDropped' : 'menu'}`}>
             <p className='menuText pb-4'>Login</p>
             <div className='divider' />
             <p className='menuText pb-4'>Sign up</p>
@@ -44,7 +47,6 @@ class Navbar extends Component {
             <p className='menuText'>About us</p>
           </div>
           : null}
-
       </div>
     )
   }
