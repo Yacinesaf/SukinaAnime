@@ -15,12 +15,13 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div className="justify-content-center navbar" >
-        <div className='row col-xs-10 col-sm-11 justify-content-between mx-0 px-0'>
+      <div className="justify-content-center navbar">
+        <div className='row col-10 col-md-11 justify-content-between mx-0 px-0 align-items-center'>
           <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
           {this.props.isUserLogged ? <Avatar alt='avatar' /> :
             this.props.smDown ?
               <button
+                onClick={() => { this.setState({ menuIsClicked: !this.state.menuIsClicked }) }}
                 className={this.state.menuIsClicked ? "hamburger hamburger--spin is-active menubtn" : "hamburger hamburger--spin menubtn"}
                 type="button">
                 <span className="hamburger-box">
@@ -34,6 +35,16 @@ class Navbar extends Component {
               </div>
           }
         </div>
+        {this.props.smDown ?
+          <div className={`col-10 col-md-11 mx-0 px-0 text-center menu py-2 ${this.state.menuIsClicked ? 'd-block' : 'd-none'}`}>
+            <p className='menuText pb-4'>Login</p>
+            <div className='divider' />
+            <p className='menuText pb-4'>Sign up</p>
+            <div className='divider' />
+            <p className='menuText'>About us</p>
+          </div>
+          : null}
+
       </div>
     )
   }

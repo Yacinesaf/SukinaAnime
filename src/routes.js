@@ -67,6 +67,7 @@ function Routes() {
   return (
     <MuiThemeProvider theme={customTheme}>
       <div className='bg'>
+        <Navbar smDown={smDown(window)} history={history} />
         <Route exact path='/' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} window={window} />} />
       </div>
     </MuiThemeProvider>

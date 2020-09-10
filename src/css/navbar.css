@@ -12,17 +12,15 @@
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
-  font-size : 16px;
-  
+  font-size: 16px;
 }
-
 
 .login {
   margin-right: 25px;
   color: white;
   background-color: transparent;
   cursor: pointer;
-  font-size : 16px; 
+  font-size: 16px;
 }
 
 .navbar {
@@ -38,6 +36,24 @@
   background-attachment: fixed;
   background-size: cover;
   padding: 12px 0px;
+}
+
+.menu {
+  animation: slide 0.2s ease-in-out;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-140px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.menuText {
+  color: white;
+  font-size: 1.25rem;
 }
 
 .hamburger {
@@ -129,7 +145,7 @@
 
 @media (max-width: 575.99px) {
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    width: 30px;
+    width: 26px;
     height: 3px;
   }
   .hamburger-inner::before {
@@ -139,7 +155,7 @@
     bottom: -7px;
   }
   .hamburger-box {
-    width: 30px;
+    width: 26px;
     height: 24px;
     display: inline-block;
     position: relative;
