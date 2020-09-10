@@ -14,7 +14,7 @@ export default class SignPage extends Component {
   }
   render() {
     return (
-      <div className='row justify-content-center mx-0 px-0' style={{height : this.props.smDown ? '100vh' : 'unset'}}>
+      <div className='row justify-content-center mx-0 px-0' style={{ height: this.props.smDown ? '100vh' : 'unset', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-md-6 d-flex align-items-center' style={{ padding: this.props.smDown ? 0 : '0px 100px' }}>
           <form style={{ width: 'inherit' }}>
             <label htmlFor='email' className='py-1 py-md-3 field-title'>Email adress</label>
@@ -30,13 +30,13 @@ export default class SignPage extends Component {
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <div className='carousel-img' style={{ backgroundImage: `url(${carousel1})` }} />
+                <div style={{ backgroundImage: `url(${carousel1})` }} className='carousel-img' />
               </div>
               <div className="carousel-item">
-                <div className='carousel-img' style={{ backgroundImage: `url(${carousel2})` }} />
+                <div style={{ backgroundImage: `url(${carousel2})` }} className='carousel-img' />
               </div>
               <div className="carousel-item">
-                <div className='carousel-img' style={{ backgroundImage: `url(${carousel3})` }} />
+                <div style={{ backgroundImage: `url(${carousel3})` }} className='carousel-img' />
               </div>
             </div>
           </div>

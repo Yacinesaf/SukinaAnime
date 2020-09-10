@@ -1,10 +1,9 @@
 .carousel-img {
-  background-position: center;
-  background-repeat: no-repeat;
+  height: calc(100vh - 72px);
+  width: auto;
   background-size: cover;
+  background-position: center;
   width: 100%;
-  height: 100vh;
-  
 }
 
 .inputfield {
