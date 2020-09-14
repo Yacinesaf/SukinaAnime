@@ -33,9 +33,9 @@ class SignPage extends Component {
   }
 
   render() {
-    console.log(this.isEmailValid(this.state.email));
+    console.log(this.props.location.pathname);
     return (
-      <div className='row justify-content-center mx-0 px-0' style={{ height: this.props.smDown ? '100vh' : 'unset', paddingTop: this.props.smDown ? 0 : 72 }}>
+      <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
           <form style={{ width: 'inherit' }}>
             <label htmlFor='email' className='py-3 py-md-3 field-title'>Email adress</label>
@@ -57,11 +57,11 @@ class SignPage extends Component {
               placeholder='Password' />
             {!this.isPasswordValid(this.state.password) ? <p className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</p> : null}
             <div className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
-              {this.props.location.pathname === 'login' ? 'Login' : 'Sign up'}
+              {this.props.location.pathname.split('/')[1] === 'Login' ? 'Login' : 'Sign up'}
             </div>
           </form>
         </div>
-        <div className='col-lg-5 col-xl-4 d-none d-lg-block p-0'>
+        <div className='col-lg-5 col-xl-4 d-none d-lg-block pt-5 px-0'>
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">

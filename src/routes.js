@@ -45,10 +45,11 @@ function Routes() {
   return (
     <div className='bg'>
       <Navbar smDown={smDown(window)} history={history} />
-      <Route exact path='/' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} window={window} />} />
+      <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} history={history} />} />
+      <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} location={location} />} />
+      <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} />} />
     </div>
   );
 }
-// <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown} history={history} />} />
-// <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown} location={location} />} />
+
 export default Routes;
