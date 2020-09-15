@@ -5,13 +5,15 @@ import carousel3 from '../assets/poster-780.jpg'
 import '../css/signPage.css'
 import '../css/styles.css'
 import { connect } from 'react-redux'
+import { newUser } from '../services/apiEndpoints'
 
 class SignPage extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       email: null,
-      password: null
+      password: null,
+      location: this.props.location.pathname.split('/')[1]
     }
   }
 
@@ -26,28 +28,28 @@ class SignPage extends Component {
   }
 
   isFormValid = () => {
-    if (this.state.email === null && this.state.password === null) {
+    if (this.state.email === null || this.state.password === null) {
       return false
     }
     return Boolean(this.isEmailValid(this.state.email) && this.isPasswordValid(this.state.password))
   }
 
   render() {
-    console.log(this.props.location.pathname);
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
           <form style={{ width: 'inherit' }}>
-            <label htmlFor='email' className='py-3 py-md-3 field-title'>Email adress</label>
+            <label htmlFor='email' className='py-3 py-md-1 field-title'>Email address</label>
             <input
               style={{ border: !this.isEmailValid(this.state.email) ? '2px solid #eb4d4b' : '2px solid transparent' }}
               onChange={(e) => { this.setState({ email: e.target.value }); this.isEmailValid(e.target.value) }}
               id='email'
               className='inputfield'
               type='text'
-              placeholder='Enter Email' />
+              placeholder='email@gmail.com' />
             {!this.isEmailValid(this.state.email) ? <p className='error-text pt-2'>Please enter a valid email</p> : null}
-            <label htmlFor='password' className='py-3 py-md-3 field-title'>Password</label>
+            <div className='py-2' />
+            <label htmlFor='password' className='py-1 py-md-1 field-title'>Password</label>
             <input
               style={{ border: !this.isPasswordValid(this.state.password) ? '2px solid #eb4d4b' : '2px solid transparent' }}
               onChange={(e) => { this.setState({ password: e.target.value }); this.isPasswordValid(e.target.value) }}
@@ -56,8 +58,13 @@ class SignPage extends Component {
               type='password'
               placeholder='Password' />
             {!this.isPasswordValid(this.state.password) ? <p className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</p> : null}
-            <div className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
-              {this.props.location.pathname.split('/')[1] === 'Login' ? 'Login' : 'Sign up'}
+            <div onClick={() => {
+              // if (this.isFormValid()) {
+              //   newUser(this.state.email, this.state.password)
+              // }
+              newUser(this.state.email, this.state.password)
+            }} className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
+              {this.state.location === 'Login' ? 'Login' : 'Sign up'}
             </div>
           </form>
         </div>

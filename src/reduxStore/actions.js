@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, newUser } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -22,6 +22,13 @@ export const setSelectedAnimeByFetch = (name) => dispatch => {
   return getAnimeByName(name).then(res => {
     dispatch({ type: 'SET_SELECTED_ANIME', payload: res.data[0] })
     dispatch({ type: 'SET_FETCHING', payload: false })
+  })
+}
+
+export const setUser = (email, password) => dispatch => {
+  newUser(email, password).then(res => {
+    dispatch({ type: 'SET_ID', payload: res.uid })
+    dispatch({ type: 'SET_EMAIL', payload: res.email })
   })
 }
 

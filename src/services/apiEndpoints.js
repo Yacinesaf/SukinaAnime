@@ -1,6 +1,7 @@
 import axios from 'axios'
-// import firebaseApp from '../firebase'
-
+import firebaseApp from '../firebase'
+import firebase from 'firebase'
+require('firebase/auth')
 
 const getAnimes = (pageNum) => {
   return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
@@ -16,6 +17,13 @@ const getAnimeByName = (name) => {
 
 
 }
+
+const newUser = (email, password) => {
+  return firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
+    return res
+  })
+}
+
 // const getSelectedAnimeCategorie = (categorie) => {
 //   return axios.get(`https://kitsu.io/api/edge/categories/${categorie}`).then(res => {
 //     return res
@@ -42,4 +50,5 @@ const getAnimeByName = (name) => {
 export {
   getAnimes,
   getAnimeByName,
+  newUser
 }
