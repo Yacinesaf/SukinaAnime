@@ -35,6 +35,7 @@ class SignPage extends Component {
   }
 
   render() {
+    console.log(this.props.userId)
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
@@ -89,7 +90,7 @@ class SignPage extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  userId: state.user.id
 })
 
 export default connect(mapStateToProps)(SignPage)
