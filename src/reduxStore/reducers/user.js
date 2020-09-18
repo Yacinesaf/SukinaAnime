@@ -1,7 +1,7 @@
 const initialState = {
-  email : null,
-  id : null,
-  fetchingUser : true
+  email: null,
+  id: null,
+  fetchingUser: true
 }
 
 export default function (state = initialState, action) {
@@ -9,9 +9,9 @@ export default function (state = initialState, action) {
     default: return state
 
     case 'SET_EMAIL':
-      return { ...state, selectedAnime: action.payload }
+      return { ...state, email: action.payload }
     case 'SET_ID':
-      return { ...state, relatedAnimes: action.payload }
+      return { ...state, id: action.payload }
     case 'SET_FETCHING_USER':
       return { ...state, fetching: action.payload }
 

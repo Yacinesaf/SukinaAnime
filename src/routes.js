@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router'
 import Navbar from './components/Navbar';
 import { useLocation, useHistory } from "react-router-dom";
-import store from './reduxStore/store'
 import Animes from './components/Animes';
+import store from './reduxStore/store'
 import AnimeInfo from './components/AnimeInfo'
 import SignPage from './components/SignPage';
 import firebase from 'firebase'
@@ -45,6 +45,7 @@ function Routes() {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+      console.log(user)
       store.dispatch({ type: 'SET_ID', payload: user.uid })
       store.dispatch({ type: 'SET_EMAIL', payload: user.email })
     } else {
