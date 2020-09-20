@@ -45,7 +45,6 @@ function Routes() {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      console.log(user)
       store.dispatch({ type: 'SET_ID', payload: user.uid })
       store.dispatch({ type: 'SET_EMAIL', payload: user.email })
     } else {

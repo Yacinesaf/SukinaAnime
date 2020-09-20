@@ -17,11 +17,32 @@ class Animes extends Component {
   }
   componentDidMount() {
     this.props.setAnimes()
+    console.log(this.pagination(3,3))
   }
 
-  pagination = (page) => {
-    let arr = [];
-    if(page -1 <= 0){}
+  pagination = (page, lastPage) => {
+    let arr = [page];
+    if (page - 1 > 0) {
+      arr.unshift(page - 1)
+    }
+    if (page - 2 > 0) {
+      arr.unshift(page - 2)
+    }
+    let remainingElementslength = arr.length
+    for (let i = 1; i <= 5 - remainingElementslength; i++) {
+      if (page + i <= lastPage) {
+        arr.push(page + i)
+      }
+    }
+    if (arr.length < 5) {
+      let remaining = arr.length
+      for (let i = 1; i <= 5 - remaining; i++) {
+        if (arr[0] - i > 0) {
+          arr.unshift(arr[0] - 1)
+        }
+      }
+    }
+    return arr
   }
 
   render() {
