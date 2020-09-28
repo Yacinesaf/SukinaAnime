@@ -21,3 +21,7 @@ p {
 button:focus {
   outline: none;
 }
+
+.white-text {
+  color: white;
+}

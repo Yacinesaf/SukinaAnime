@@ -21,3 +21,18 @@
     transform: translateX(100%);
   }
 }
+
+.selected {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  background: #5f27cd
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
