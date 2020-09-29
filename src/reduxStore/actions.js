@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeGenre } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -10,6 +10,8 @@ export const setAnimes = (pageNum) => dispatch => {
 }
 
 export const setSelectedAnime = (anime) => dispatch => {
+  const genres = anime.relationships.genres.data
+  dispatch({ type: 'SET_GENRE', payload: genres[Math.floor(Math.random() * genres.length)].id })
   dispatch({ type: 'SET_SELECTED_ANIME', payload: anime })
 }
 
@@ -20,6 +22,8 @@ export const setCurrentPage = (page) => dispatch => {
 export const setSelectedAnimeByFetch = (name) => dispatch => {
   dispatch({ type: 'SET_FETCHING', payload: true })
   return getAnimeByName(name).then(res => {
+    const genres = res.data[0].relationships.genres.data
+    dispatch({ type: 'SET_GENRE', payload: genres[Math.floor(Math.random() * genres.length)].id })
     dispatch({ type: 'SET_SELECTED_ANIME', payload: res.data[0] })
     dispatch({ type: 'SET_FETCHING', payload: false })
   })
@@ -30,10 +34,12 @@ export const setUser = (user) => dispatch => {
   dispatch({ type: 'SET_EMAIL', payload: user.email })
 }
 
-// export const setRelatedAnimes = (link) => dispatch => {
-//   dispatch({ type: 'SET_FETCHING', payload: true })
-//   return getyRelatedAnimes(link).then(res => {
-//     dispatch({ type: 'SET_RELATED_ANIMES', payload: res.data })
-//     dispatch({ type: 'SET_FETCHING', payload: false })
-//   })
-// }
+export const setRelatedAnimes = (genre) => dispatch => {
+  dispatch({ type: 'SET_FETCHING', payload: true })
+  return getSelectedAnimeGenre(genre).then(resp => {
+    return getyRelatedAnimes(resp).then(res => {
+      dispatch({ type: 'SET_RELATED_ANIMES', payload: res.data.data })
+      dispatch({ type: 'SET_FETCHING', payload: false })
+    })
+  })
+}

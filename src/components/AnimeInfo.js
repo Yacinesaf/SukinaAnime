@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setSelectedAnimeByFetch } from '../reduxStore/actions'
+import { setSelectedAnimeByFetch, setRelatedAnimes } from '../reduxStore/actions'
 import loadingState from '../assets/loading.svg'
 import GradeIcon from '@material-ui/icons/Grade';
 import placeHolder from '../assets/noImageHolder.jpg'
@@ -11,7 +11,12 @@ class AnimeInfo extends Component {
   componentDidMount() {
     let name = this.props.location.pathname.split('/')
     if (!this.props.anime) {
-      this.props.setSelectedAnimeByFetch(name[name.length - 1])
+      this.props.setSelectedAnimeByFetch(name[name.length - 1]).then(res => {
+        this.props.setRelatedAnimes(this.props.genre)
+      })
+    }
+    if (this.props.genre) {
+      this.props.setRelatedAnimes(this.props.genre)
     }
   }
 
@@ -29,7 +34,6 @@ class AnimeInfo extends Component {
 
   render() {
     // console.log(this.props.anime);
-    // console.log(this.props.related);
     return (
       <div>
         {this.props.anime ?
@@ -70,6 +74,7 @@ class AnimeInfo extends Component {
                           <p className='anime-title bold_text'>{this.rateToFive(this.props.anime.attributes.averageRating)}</p>
                           <GradeIcon fontSize='large' style={{ color: '#fbc02d' }} />
                         </div>
+                        <p className='subtitle'><strong>Favorites count</strong>  :  {this.props.anime.attributes.favoritesCount}</p>
                       </div>
                       <iframe title='trialer' id="ytplayer" width="480" height="270"
                         allow='autoplay' src={`https://www.youtube.com/embed/${this.props.anime.attributes.youtubeVideoId}`}
@@ -79,15 +84,17 @@ class AnimeInfo extends Component {
                       <p className='subtitle bold_text'>Synopsis</p>
                       <p className='synopsis'>{this.props.anime.attributes.description}</p>
                     </div>
-                    <div className='row' style={{ padding: '40px 10px' }}>
+                    <div style={{ padding: '40px 10px' }}>
                       <p className='subtitle bold_text'>Related Animes</p>
-                      {this.props.fetching ? null :
-                        this.props.related.map((x, i) => (
-                          <div className='col-3' style={{ paddingRight: 10 }}>
-                            {/*                          <img alt src={}  width={'100%'} height={200} />*/}
-                          </div>
-                        ))
-                      }
+                      <div className='row' style={{padding : '20px 10px'}}>
+                        {this.props.related ?
+                          this.props.related.map((x, i) => (
+                            <div key={i} className='col-3' style={{ paddingRight: 10 }}>
+                              <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
+                            </div>
+                          ))
+                          : null}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -108,7 +115,7 @@ const mapStateToProps = state => ({
   anime: state.selectedAnime.selectedAnime,
   related: state.selectedAnime.relatedAnimes,
   fetching: state.selectedAnime.fetching,
-
+  genre: state.selectedAnime.genre
 })
 
-export default connect(mapStateToProps, { setSelectedAnimeByFetch })(AnimeInfo)
+export default connect(mapStateToProps, { setSelectedAnimeByFetch, setRelatedAnimes })(AnimeInfo)

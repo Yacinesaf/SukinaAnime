@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setAnimes, setSelectedAnime } from '../reduxStore/actions'
 import AnimeCard from './AnimeCard'
-import { Pagination } from '@material-ui/lab';
 import '../css/styles.css'
 import '../css/animes.css'
 
@@ -17,7 +16,6 @@ class Animes extends Component {
   }
   componentDidMount() {
     this.props.setAnimes()
-    console.log(this.pagination(3, 3))
   }
 
   pagination = (page, lastPage) => {
@@ -168,11 +166,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { setAnimes, setSelectedAnime })(Animes)
-
-
-// <Pagination color="secondary" page={this.state.currentPage} size={this.props.smDown ? 'small' : 'large'} showLastButton showFirstButton count={Math.ceil(Number(this.props.animeCount) / 12)}
-// onChange={(event, page) => {
-//   this.setState({ currentPage: page })
-//   this.props.setAnimes(page)
-// }}
-// />
