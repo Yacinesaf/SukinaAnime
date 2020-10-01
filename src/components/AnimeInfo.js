@@ -9,6 +9,7 @@ import '../css/styles.css'
 
 class AnimeInfo extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0)
     let name = this.props.location.pathname.split('/')
     if (this.props.categoryId) {
       this.props.setRelatedAnimes(this.props.categoryId)
@@ -78,7 +79,7 @@ class AnimeInfo extends Component {
                           </svg>
                         </div>
                         {this.props.smDown ?
-                          <div style={{ width: 'fit-content' }}>
+                          <div>
                             <p className='info-mobile'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
                             <p className='info-mobile'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
                             <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' target="_blank" href={`https://www.youtube.com/watch?v=${this.props.anime.attributes.youtubeVideoId}`}>
