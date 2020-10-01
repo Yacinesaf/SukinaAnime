@@ -10,16 +10,15 @@ import '../css/styles.css'
 class AnimeInfo extends Component {
   componentDidMount() {
     let name = this.props.location.pathname.split('/')
+    if (this.props.categoryId) {
+      this.props.setRelatedAnimes(this.props.categoryId)
+    }
     if (!this.props.anime) {
       this.props.setSelectedAnimeByFetch(name[name.length - 1]).then(() => {
         this.props.setRelatedAnimes(this.props.categoryId)
       })
     }
-    if (!this.props.relatedAnimes) {
-      if (this.props.categoryId) {
-        this.props.setRelatedAnimes(this.props.categoryId)
-      }
-    }
+
   }
 
 
