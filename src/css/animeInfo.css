@@ -5,25 +5,67 @@
   color: white;
 }
 
+.info-mobile {
+  padding: 4px 10px;
+  font-size: 1.25rem;
+  color: white;
+}
+
 .infoLast {
   padding: 10px 0px;
   font-size: 1.25rem;
   color: white;
 }
+
 .anime-title {
-  color : white;
+  color: white;
   padding: 10px;
   font-size: 2.5rem;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   max-width: 690px;
 }
 
+.anime-title-mobile {
+  color: white;
+  padding: 4px 10px;
+  font-size: 1.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 320px;
+}
+
 .subtitle {
-  color : white;
+  color: white;
   padding: 10px;
   font-size: 1.75rem;
+}
+
+.subtitle-mobile {
+  color: white;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.related-titles {
+  color: white;
+  padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  max-width: 184px;
+}
+.related-titles-mobile {
+  color: white;
+  padding: 10px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1rem;
+  max-width: 138px;
 }
 
 .synopsis {
@@ -32,3 +74,16 @@
   font-size: 1.3rem;
 }
 
+.synopsis-mobile {
+  color: white;
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
+.trailer-btn {
+  border: 2px solid #5f27cd;
+  border-radius: 5px;
+  padding: 8px 20px;
+  width: fit-content;
+  margin: 10px;
+}

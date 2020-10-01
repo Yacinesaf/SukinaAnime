@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { rateToFive, titleFormater } from '../services/helperFunctions'
 import { setSelectedAnimeByFetch, setRelatedAnimes } from '../reduxStore/actions'
 import loadingState from '../assets/loading.svg'
-import GradeIcon from '@material-ui/icons/Grade';
 import placeHolder from '../assets/noImageHolder.jpg'
 import '../css/animeInfo.css'
 import '../css/styles.css'
@@ -11,18 +11,19 @@ class AnimeInfo extends Component {
   componentDidMount() {
     let name = this.props.location.pathname.split('/')
     if (!this.props.anime) {
-      this.props.setSelectedAnimeByFetch(name[name.length - 1]).then(res => {
-        this.props.setRelatedAnimes(this.props.genre)
+      this.props.setSelectedAnimeByFetch(name[name.length - 1]).then(() => {
+        this.props.setRelatedAnimes(this.props.categoryId)
       })
     }
-    if (this.props.genre) {
-      this.props.setRelatedAnimes(this.props.genre)
+    if (!this.props.relatedAnimes) {
+      if (this.props.categoryId) {
+        this.props.setRelatedAnimes(this.props.categoryId)
+      }
     }
   }
 
-  rateToFive = (rate) => {
-    return (rate / 20).toFixed(2)
-  }
+
+
 
   // starToDislpay = (rate) => {
   //   let converted = (rate / 20).toFixed(2);
@@ -33,9 +34,8 @@ class AnimeInfo extends Component {
   // }
 
   render() {
-    // console.log(this.props.anime);
     return (
-      <div>
+      <div style={{ paddingTop: 72 }}>
         {this.props.anime ?
           <div>
             <div style={{
@@ -46,51 +46,72 @@ class AnimeInfo extends Component {
               width: '100%',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              height: 350,
+              height: this.props.smDown ? 150 : 350,
               boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
             }} />
             <div className='row justify-content-center mx-0'>
               <div className='col-11 px-0 d-flex' style={{ position: 'relative', paddingTop: 30 }}>
-                <div className='row justify-content-center'>
-                  <div className='col-2' style={{ transform: 'translateY(-120px)' }}>
-                    <img alt='poster' src={this.props.anime.attributes.posterImage.small} width={'100%'} style={{ boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }} />
-                    <div style={{ padding: '30px 0px' }}>
-                      <p className='info'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
-                      <p className='info'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength} min</p>
-                      <p className='info'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
-                      <p className='info'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</p>
-                      <p className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</p>
-                      <p className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</p>
-                      <p className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</p>
-                      <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
-                      {this.props.anime.attributes.nsfw ? <p className='info bold_text'>NSFW</p> : null}
+                <div className='row justify-content-center px-0 mx-0'>
+                  {this.props.smDown ? null :
+                    <div className='col-2' style={{ transform: 'translateY(-120px)' }}>
+                      <img alt='poster' src={this.props.anime.attributes.posterImage.small} width={'100%'} style={{ boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }} />
+                      <div style={{ padding: '30px 0px' }}>
+                        <p className='info'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
+                        <p className='info'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength ? this.props.anime.attributes.episodeLength : 24} min</p>
+                        <p className='info'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
+                        <p className='info'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</p>
+                        <p className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</p>
+                        <p className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</p>
+                        <p className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</p>
+                        <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
+                        {this.props.anime.attributes.nsfw ? <p className='info bold_text'>NSFW</p> : null}
+                      </div>
                     </div>
-                  </div>
-                  <div className='col-10' style={{ paddingLeft: 40, position: 'relative' }}>
+                  }
+                  <div className='col-11 col-md-10 pr-0' style={{ paddingLeft: this.props.smDown ? 0 : 40, position: 'relative' }}>
                     <div className='d-flex justify-content-between'>
                       <div>
-                        <p className='anime-title bold_text'>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
-                        <div style={{ display: 'flex', alignItems: 'center', paddingTop: 5 }}>
-                          <p className='anime-title bold_text'>{this.rateToFive(this.props.anime.attributes.averageRating)}</p>
-                          <GradeIcon fontSize='large' style={{ color: '#fbc02d' }} />
+                        <p className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
+                        <div style={{ display: 'flex', alignItems: 'center', paddingTop: this.props.smDown ? 0 : 5 }}>
+                          <p className={`bold_text ${this.props.smDown ? 'subtitle-mobile' : 'anime-title'}`}>{rateToFive(this.props.anime.attributes.averageRating)}</p>
+                          <svg width={this.props.smDown ? '1.5em' : "2.25em"} height={this.props.smDown ? '1.5em' : "2.25em"} viewBox="0 0 16 16" className="bi bi-star-fill starIcon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                          </svg>
                         </div>
-                        <p className='subtitle'><strong>Favorites count</strong>  :  {this.props.anime.attributes.favoritesCount}</p>
+                        {this.props.smDown ?
+                          <div style={{ width: 'fit-content' }}>
+                            <p className='info-mobile'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
+                            <p className='info-mobile'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
+                            <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' target="_blank" href={`https://www.youtube.com/watch?v=${this.props.anime.attributes.youtubeVideoId}`}>
+                              <div className='trailer-btn'>
+                                <p style={{ color: 'white', fontSize: 18 }}>Watch trailer</p>
+                              </div>
+                            </a>
+                          </div>
+                          : null}
+                        {this.props.smDown ? null :
+                          <p className={this.props.smDown ? 'subtitle-mobile' : 'subtitle'}><strong>Favorites count</strong>  :  {this.props.anime.attributes.favoritesCount}</p>
+                        }
                       </div>
-                      <iframe title='trialer' id="ytplayer" width="480" height="270"
-                        allow='autoplay' src={`https://www.youtube.com/embed/${this.props.anime.attributes.youtubeVideoId}`}
-                        frameBorder="0"></iframe>
+
+                      {this.props.smDown ? null
+                        : <iframe title='trialer' id="ytplayer" width="480" height="270"
+                          allow='autoplay' src={`https://www.youtube.com/embed/${this.props.anime.attributes.youtubeVideoId}`}
+                          frameBorder="0"></iframe>
+                      }
                     </div>
-                    <div style={{ paddingTop: 30 }}>
+                    <div style={{ paddingTop: this.props.smDown ? 10 : 30 }}>
                       <p className='subtitle bold_text'>Synopsis</p>
-                      <p className='synopsis'>{this.props.anime.attributes.description}</p>
+                      <p className={this.props.smDown ? 'synopsis-mobile' : 'synopsis'}>{this.props.anime.attributes.description}</p>
                     </div>
-                    <div style={{ padding: '40px 10px' }}>
+                    <div style={{ padding: this.props.smDown ? '15px 0px' : '40px 10px' }}>
                       <p className='subtitle bold_text'>Related Animes</p>
-                      <div className='row' style={{padding : '20px 10px'}}>
+                      <div className='row mx-0 px-0' style={{ padding: '20px 10px' }}>
                         {this.props.related ?
                           this.props.related.map((x, i) => (
-                            <div key={i} className='col-3' style={{ paddingRight: 10 }}>
+                            <div key={i} className='col-6 col-md-2' style={{ padding: 10 }}>
                               <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
+                              <p className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</p>
                             </div>
                           ))
                           : null}
@@ -102,8 +123,8 @@ class AnimeInfo extends Component {
             </div>
           </div>
           :
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <img alt='loading' src={loadingState} style={{ transform: 'scale(0.6)' }} />
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100vh - 72px)' }}>
+            <img alt='loading' src={loadingState} style={{ transform: this.props.smDown ? 'scale(0.2)' : 'scale(0.6)' }} />
           </div>
         }
       </div>
@@ -115,7 +136,7 @@ const mapStateToProps = state => ({
   anime: state.selectedAnime.selectedAnime,
   related: state.selectedAnime.relatedAnimes,
   fetching: state.selectedAnime.fetching,
-  genre: state.selectedAnime.genre
+  categoryId: state.selectedAnime.categoryId
 })
 
 export default connect(mapStateToProps, { setSelectedAnimeByFetch, setRelatedAnimes })(AnimeInfo)

@@ -4,14 +4,14 @@ import firebase from 'firebase'
 require('firebase/auth')
 
 const getAnimes = (pageNum) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?include=genres&page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
+  return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
     return res.data
   })
 
 
 }
 const getAnimeByName = (name) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?include=genres&page[limit]=1&filter[text]=${name}`).then(res => {
+  return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=1&filter[text]=${name}`).then(res => {
     return res.data
   })
 
@@ -24,14 +24,14 @@ const newUser = (email, password) => {
   })
 }
 
-const getSelectedAnimeGenre = (genre) => {
-  return axios.get(`https://kitsu.io/api/edge/genres/${genre}`).then(res => {
-    return res.data.data.attributes.name
+const getSelectedAnimeCategory = (category) => {
+  return axios.get(`https://kitsu.io/api/edge/categories/${category}`).then(res => {
+    return res.data.data.attributes.slug
   })
 }
 
-const getyRelatedAnimes = (genre) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?filter[genres]=${genre}&page[limit]=4`).then(res => {
+const getyRelatedAnimes = (category) => {
+  return axios.get(`https://kitsu.io/api/edge/anime?include=categories&filter[categories]=${category}&page[limit]=6`).then(res => {
     return res
   })
 }
@@ -52,6 +52,6 @@ export {
   getAnimes,
   getAnimeByName,
   newUser,
-  getSelectedAnimeGenre,
+  getSelectedAnimeCategory,
   getyRelatedAnimes
 }

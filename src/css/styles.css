@@ -25,3 +25,10 @@ button:focus {
 .white-text {
   color: white;
 }
+
+.starIcon {
+  width: 24px;
+  height: 24px;
+  padding-left: 5px;
+  color: #FFC300;
+}
