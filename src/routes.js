@@ -48,15 +48,15 @@ function Routes() {
       store.dispatch({ type: 'SET_ID', payload: user.uid })
       store.dispatch({ type: 'SET_EMAIL', payload: user.email })
     } else {
-      console.log('user logged out')
+      store.dispatch({ type: 'SET_ID', payload: null})
     }
   });
   return (
     <div className='bg'>
       {<Navbar smDown={smDown(window)} history={history} />}
       <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
-      <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} location={location} />} />
-      <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} />} />
+      <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
+      <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
     </div>
   );
 }

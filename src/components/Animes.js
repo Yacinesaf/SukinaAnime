@@ -68,7 +68,7 @@ class Animes extends Component {
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
                 <div className='col-12 col-md-3' key={i} style={{ padding: 20 }}>
-                  <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 300 }} />
+                  <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 300 }}></div>
                 </div>
               ))
               :
@@ -96,8 +96,8 @@ class Animes extends Component {
                 window.scrollTo(0, 0)
               }
             }}
-            width="3em"
-            height="3em"
+            width={this.props.smDown ? '3em' : '2em'}
+            height={this.props.smDown ? '3em' : '2em'}
             viewBox="0 0 16 16"
             className="bi bi-skip-backward-fill mx-md-2"
             fill={this.isFirstPage(this.state.currentPage) ? 'grey' : "white"}
@@ -115,8 +115,8 @@ class Animes extends Component {
                 window.scrollTo(0, 0)
               }
             }}
-            width="3em"
-            height="3em"
+            width={this.props.smDown ? '3em' : '2em'}
+            height={this.props.smDown ? '3em' : '2em'}
             viewBox="0 0 16 16"
             className="bi bi-caret-left-fill ml-3 mx-md-2"
             fill={this.isFirstPage(this.state.currentPage) ? 'grey' : "white"}
@@ -139,8 +139,8 @@ class Animes extends Component {
                 window.scrollTo(0, 0)
               }
             }}
-            width="3em"
-            height="3em"
+            width={this.props.smDown ? '3em' : '2em'}
+            height={this.props.smDown ? '3em' : '2em'}
             viewBox="0 0 16 16"
             className="bi bi-caret-right-fill mr-3 mx-md-2"
             fill={this.isLastPage(this.state.currentPage) ? 'grey' : "white"}
@@ -156,8 +156,8 @@ class Animes extends Component {
                 window.scrollTo(0, 0)
               }
             }}
-            width="3em"
-            height="3em"
+            width={this.props.smDown ? '3em' : '2em'}
+            height={this.props.smDown ? '3em' : '2em'}
             viewBox="0 0 16 16"
             className="bi bi-skip-forward-fill mx-md-2"
             fill={this.isLastPage(this.state.currentPage) ? 'grey' : "white"}

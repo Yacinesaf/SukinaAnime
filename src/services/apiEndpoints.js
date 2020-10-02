@@ -36,6 +36,13 @@ const getyRelatedAnimes = (category) => {
   })
 }
 
+const logout = () => {
+  return firebase.auth().signOut()
+}
+const login = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
+}
+
 
 // const getAnimesByGenra = (genre) => {
 //   return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]=0?filter[categories]=${genre}`).then(res => {
@@ -53,5 +60,7 @@ export {
   getAnimeByName,
   newUser,
   getSelectedAnimeCategory,
-  getyRelatedAnimes
+  getyRelatedAnimes,
+  logout,
+  login
 }

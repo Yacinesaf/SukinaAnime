@@ -22,6 +22,7 @@
   justify-content: center;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
 .button-disabled {
   padding: 12px 20px;
@@ -45,4 +46,9 @@ input:focus{
 .error-text {
   color: #eb4d4b;
   font-size: 1rem;
+}
+.pageName {
+  color: white;
+  font-weight: 600;
+  transform: translateY(-80px);
 }

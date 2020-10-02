@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, signin } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -41,5 +41,11 @@ export const setRelatedAnimes = (category) => dispatch => {
       dispatch({ type: 'SET_RELATED_ANIMES', payload: res.data.data })
       dispatch({ type: 'SET_FETCHING', payload: false })
     })
+  })
+}
+
+export const signOut = () => dispatch => {
+  return logout().then(() => {
+    dispatch({ type: 'SET_ID', payload: null })
   })
 }

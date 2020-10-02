@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import carousel1 from '../assets/lf3zl98yy7011.jpg'
 import carousel2 from '../assets/shingeki-no-kyojin-poster.jpg'
 import carousel3 from '../assets/poster-780.jpg'
+import carousel4 from '../assets/s592.jpeg'
+import carousel5 from '../assets/82553f840be22c1ecb83a07aaf2be242.jpg'
+import carousel6 from '../assets/100demonslayer.jpeg'
 import '../css/signPage.css'
 import '../css/styles.css'
 import { connect } from 'react-redux'
-import { newUser } from '../services/apiEndpoints'
+import { newUser, login } from '../services/apiEndpoints'
 
 class SignPage extends Component {
   constructor(props) {
@@ -13,7 +16,8 @@ class SignPage extends Component {
     this.state = {
       email: null,
       password: null,
-      location: this.props.location.pathname.split('/')[1]
+      showSnackbar: false,
+      snackMessage: null
     }
   }
 
@@ -34,12 +38,22 @@ class SignPage extends Component {
     return Boolean(this.isEmailValid(this.state.email) && this.isPasswordValid(this.state.password))
   }
 
+  snackbar = () => {
+    this.setState({ showSnackbar: true });
+    setTimeout(() => {
+      this.setState({ showSnackbar: false });
+    }, 3000);
+  }
+
   render() {
-    console.log(this.props.userId)
+    let location = this.props.location.pathname.split('/')[1];
+
+
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
           <form style={{ width: 'inherit' }}>
+            <h1 className='pageName'>{location === 'Login' ? 'Log in' : 'Sign up' }</h1>
             <label htmlFor='email' className='py-3 py-md-1 field-title'>Email address</label>
             <input
               style={{ border: !this.isEmailValid(this.state.email) ? '2px solid #eb4d4b' : '2px solid transparent' }}
@@ -60,29 +74,57 @@ class SignPage extends Component {
               placeholder='Password' />
             {!this.isPasswordValid(this.state.password) ? <p className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</p> : null}
             <div onClick={() => {
-              // if (this.isFormValid()) {
-              //   newUser(this.state.email, this.state.password)
-              // }
-              newUser(this.state.email, this.state.password)
+              if (this.isFormValid()) {
+                if (location !== 'Login') {
+                  newUser(this.state.email, this.state.password)
+                  this.props.history.push('/')
+                }
+              } else {
+                login(this.state.email, this.state.password).then(() => {
+                  this.props.history.push('/')
+                }).catch((error) => {
+                  this.snackbar()
+                  this.setState({ snackMessage: 'User does not exist. Please try again', showSnackbar: true })
+                })
+              }
             }} className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
-              {this.state.location === 'Login' ? 'Login' : 'Sign up'}
+              {location === 'Login' ? 'Login' : 'Sign up'}
             </div>
           </form>
         </div>
         <div className='col-lg-5 col-xl-4 d-none d-lg-block pt-5 px-0'>
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <div style={{ backgroundImage: `url(${carousel1})` }} className='carousel-img' />
+            {location === 'Login' ?
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <div style={{ backgroundImage: `url(${carousel1})` }} className='carousel-img' />
+                </div>
+                <div className="carousel-item">
+                  <div style={{ backgroundImage: `url(${carousel2})` }} className='carousel-img' />
+                </div>
+                <div className="carousel-item">
+                  <div style={{ backgroundImage: `url(${carousel3})` }} className='carousel-img' />
+                </div>
               </div>
-              <div className="carousel-item">
-                <div style={{ backgroundImage: `url(${carousel2})` }} className='carousel-img' />
+              :
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <div style={{ backgroundImage: `url(${carousel4})` }} className='carousel-img' />
+                </div>
+                <div className="carousel-item">
+                  <div style={{ backgroundImage: `url(${carousel5})` }} className='carousel-img' />
+                </div>
+                <div className="carousel-item">
+                  <div style={{ backgroundImage: `url(${carousel6})` }} className='carousel-img' />
+                </div>
               </div>
-              <div className="carousel-item">
-                <div style={{ backgroundImage: `url(${carousel3})` }} className='carousel-img' />
-              </div>
-            </div>
+            }
           </div>
+        </div>
+        <div
+          className={this.state.showSnackbar ? 'snackbar-show' : 'snackbar'}
+          style={{ backgroundColor: '#eb4d4b' }}>
+          {this.state.snackMessage}
         </div>
       </div>
     )
