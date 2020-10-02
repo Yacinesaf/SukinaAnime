@@ -14,21 +14,26 @@ class SignPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: null,
-      password: null,
+      email: '',
+      password: '',
       showSnackbar: false,
-      snackMessage: null
+      snackMessage: null,
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({ email: '', password: '' });
     }
   }
 
   isPasswordValid = (password) => {
     const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-    return re.test(String(password)) || password === null
+    return re.test(String(password)) || password === ''
   }
 
   isEmailValid = (email) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase()) || email === null
+    return re.test(String(email).toLowerCase()) || email === ''
   }
 
   isFormValid = () => {
@@ -48,12 +53,11 @@ class SignPage extends Component {
   render() {
     let location = this.props.location.pathname.split('/')[1];
 
-
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
           <form style={{ width: 'inherit' }}>
-            <h1 className='pageName'>{location === 'Login' ? 'Log in' : 'Sign up' }</h1>
+            <h1 className={this.props.smDown ? 'pageName-mobile' : 'pageName'}>{location === 'Login' ? 'Log in' : 'Sign up'}</h1>
             <label htmlFor='email' className='py-3 py-md-1 field-title'>Email address</label>
             <input
               style={{ border: !this.isEmailValid(this.state.email) ? '2px solid #eb4d4b' : '2px solid transparent' }}
@@ -61,6 +65,7 @@ class SignPage extends Component {
               id='email'
               className='inputfield'
               type='text'
+              value={this.state.email}
               placeholder='email@gmail.com' />
             {!this.isEmailValid(this.state.email) ? <p className='error-text pt-2'>Please enter a valid email</p> : null}
             <div className='py-2' />
@@ -71,6 +76,7 @@ class SignPage extends Component {
               id='password'
               className='inputfield'
               type='password'
+              value={this.state.password}
               placeholder='Password' />
             {!this.isPasswordValid(this.state.password) ? <p className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</p> : null}
             <div onClick={() => {

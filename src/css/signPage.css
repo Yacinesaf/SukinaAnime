@@ -52,3 +52,8 @@ input:focus{
   font-weight: 600;
   transform: translateY(-80px);
 }
+.pageName-mobile {
+  color: white;
+  font-weight: 600;
+  transform: translateY(-20px);
+}

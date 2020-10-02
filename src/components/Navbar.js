@@ -50,8 +50,8 @@ class Navbar extends Component {
                 </button>
                 :
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div onClick={() => { this.props.history.push('/Login') }} className='login bold_text'>Login</div>
-                  <div onClick={() => { this.props.history.push('/Signup') }} className='signup bold_text'>Sign up</div>
+                  <div onClick={() => { this.props.history.replace('/Login') }} className='login bold_text'>Login</div>
+                  <div onClick={() => { this.props.history.replace('/Signup') }} className='signup bold_text'>Sign up</div>
                 </div>
             }
           </div>
