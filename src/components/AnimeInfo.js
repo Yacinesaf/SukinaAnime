@@ -6,6 +6,7 @@ import loadingState from '../assets/loading.svg'
 import placeHolder from '../assets/noImageHolder.jpg'
 import '../css/animeInfo.css'
 import '../css/styles.css'
+import FavoriteIcon from './FavoriteIcon'
 
 class AnimeInfo extends Component {
   constructor() {
@@ -29,22 +30,22 @@ class AnimeInfo extends Component {
     }
   }
 
+  favoriteHandler = () => {
+    this.setState({ favorited: !this.state.favorited })
+  }
 
-
-
-  // starToDislpay = (rate) => {
-  //   let converted = (rate / 20).toFixed(2);
-  //   switch (converted) {
-  //     case 0 < converted > 0.5 :
-  //       return ()
-  //   }
-  // }
 
   render() {
     return (
       <div style={{ paddingTop: 72 }}>
         {this.props.anime ?
           <div>
+            {this.props.smDown ? true ?
+              <div style={{ position: "absolute", right: 30, top: 90, height : 44, padding : 10, borderRadius : '100%', backgroundColor : 'rgba(33, 27, 27, 0.05)' }}>
+                <div />
+                <FavoriteIcon favorited={this.state.favorited} favoriteHandler={this.favoriteHandler} smDown={this.props.smDown} anime ={this.props.anime}  />
+              </div>
+              : null : null}
             <div style={{
               display: 'flex',
               justifyContent: 'center',
@@ -70,8 +71,8 @@ class AnimeInfo extends Component {
                         <p className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</p>
                         <p className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</p>
                         <p className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</p>
-                        <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
                         {this.props.anime.attributes.nsfw ? <p className='info bold_text'>NSFW</p> : null}
+                        <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
                       </div>
                     </div>
                   }
@@ -80,36 +81,14 @@ class AnimeInfo extends Component {
                       <div>
                         <div className='d-flex align-items-center'>
                           <p className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
-                          {!this.props.smDown ? this.props.user ? this.state.favorited ?
-                            <svg
-                              style={{ cursor: 'pointer' }}
-                              onClick={() => { this.setState({ favorited: !this.state.favorited }) }}
-                              width="2em"
-                              height="2em"
-                              viewBox="0 0 16 16"
-                              className="bi bi-heart-fill ml-4"
-                              fill="#5f27cd"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                            </svg>
-                            :
-                            <svg
-                              style={{ cursor: 'pointer' }}
-                              onClick={() => { this.setState({ favorited: !this.state.favorited }) }}
-                              width="2em"
-                              height="2em"
-                              viewBox="0 0 16 16"
-                              className="bi bi-heart ml-4"
-                              fill="white"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path fillRule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                            </svg>
+                          {!this.props.smDown ? this.props.user ?
+                            <FavoriteIcon favorited={this.state.favorited} favoriteHandler={this.favoriteHandler}  />
                             : null
                             : null}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', paddingTop: this.props.smDown ? 0 : 5 }}>
-                          <p className={`bold_text ${this.props.smDown ? 'subtitle-mobile' : 'anime-title'}`}>{rateToFive(this.props.anime.attributes.averageRating)}</p>
-                          <svg width={this.props.smDown ? '1.5em' : "2.25em"} height={this.props.smDown ? '1.5em' : "2.25em"} viewBox="0 0 16 16" className="bi bi-star-fill starIcon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <p className={`bold_text ${this.props.smDown ? 'subtitle-mobile' : 'anime-title'}`} style={{ paddingRight: this.props.smDown ? 3 : 'unset' }}>{rateToFive(this.props.anime.attributes.averageRating)}</p>
+                          <svg width={this.props.smDown ? '1.5em' : "2em"} height={this.props.smDown ? '1.5em' : "2em"} viewBox="0 0 16 16" className="bi bi-star-fill starIcon ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                           </svg>
                         </div>
@@ -158,7 +137,7 @@ class AnimeInfo extends Component {
                           :
                           Array(6).fill(0).map((x, i) => (
                             <div className='col-6 col-md-2' key={i} style={{ padding: 10 }}>
-                              <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 316 }}></div>
+                              <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: this.props.smDown ? 254 : 316 }}></div>
                             </div>
                           ))
                         }

@@ -43,6 +43,31 @@ const login = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
+const addFavoriteAnime = (obj) => {
+  let db = firebase.firestore(firebaseApp);
+  let objWithTime = { ...obj, date: firebase.firestore.Timestamp.fromDate(new Date()) }
+  return db.collection("favorites").add(objWithTime)
+    .then(function (doc) {
+      return { ...obj, id: doc.id }
+    })
+}
+
+const getMyFavorites = () => {
+  var user = firebase.auth().currentUser;
+  let db = firebase.firestore(firebaseApp);
+  return db.collection('favorites').where('userId', '==', user.uid)
+    .get()
+    .then(function (querySnapshot) {
+      let favorites = querySnapshot.docs.map(doc => {
+        let obj = doc.data();
+        obj['docId'] = doc.id
+        return obj
+      })
+      return {
+        favorites
+      }
+    })
+}
 
 // const getAnimesByGenra = (genre) => {
 //   return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]=0?filter[categories]=${genre}`).then(res => {
@@ -62,5 +87,6 @@ export {
   getSelectedAnimeCategory,
   getyRelatedAnimes,
   logout,
-  login
+  login,
+  addFavoriteAnime
 }

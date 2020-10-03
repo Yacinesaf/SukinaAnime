@@ -17,7 +17,7 @@ class SignPage extends Component {
       email: '',
       password: '',
       showSnackbar: false,
-      snackMessage: null,
+      snackMessage: 'User does not exist. Please try again',
     }
   }
   componentDidUpdate(prevProps) {
@@ -37,7 +37,7 @@ class SignPage extends Component {
   }
 
   isFormValid = () => {
-    if (this.state.email === null || this.state.password === null) {
+    if (this.state.email === '' || this.state.password === '') {
       return false
     }
     return Boolean(this.isEmailValid(this.state.email) && this.isPasswordValid(this.state.password))
@@ -90,7 +90,7 @@ class SignPage extends Component {
                   this.props.history.push('/')
                 }).catch((error) => {
                   this.snackbar()
-                  this.setState({ snackMessage: 'User does not exist. Please try again', showSnackbar: true })
+                  this.setState({ showSnackbar: true })
                 })
               }
             }} className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
@@ -129,7 +129,7 @@ class SignPage extends Component {
         </div>
         <div
           className={this.state.showSnackbar ? 'snackbar-show' : 'snackbar'}
-          style={{ backgroundColor: '#eb4d4b' }}>
+          style={{ fontSize: this.props.smDown ? 12 : 16, padding: this.props.smDown ? '10px 0px' : '16' }}>
           {this.state.snackMessage}
         </div>
       </div>

@@ -1,5 +1,6 @@
 const initialState = {
-
+  animes : [], 
+  fetchingFavorites : true
 }
 
 export default function (state = initialState, action) {

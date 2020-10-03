@@ -64,22 +64,22 @@ class Animes extends Component {
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ padding: '130px 0px 60px' }}>
         <div className='col-12 col-md-11' style={{ margin: '0px -5px' }}>
-          <div className='row justify-content-center'>
+          <div className='row justify-content-center mx-0'>
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
-                <div className='col-12 col-md-3' key={i} style={{ padding: 20 }}>
+                <div className='col-12 col-md-3 px-md-0' key={i} style={{ margin: this.props.smDown ? 0 : 20, padding: this.props.smDown ? 20 : 0 }}>
                   <div className='skeleton-box' style={{ borderRadius: 7, width: '100%', height: 300 }}></div>
                 </div>
               ))
               :
               this.props.animesList.map(x => (
-                <div className='col-12 col-md-3'
+                <div className='col-12 col-md-3  px-md-0'
                   onClick={() => {
                     this.props.setSelectedAnime(x)
                     this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`)
                   }}
                   key={x.id}
-                  style={{ padding: 20, cursor: 'pointer' }}>
+                  style={{ margin: this.props.smDown ? 0 : 20, padding: this.props.smDown ? 20 : 0, cursor: 'pointer' }}>
                   <AnimeCard obj={x} />
                 </div>
               ))

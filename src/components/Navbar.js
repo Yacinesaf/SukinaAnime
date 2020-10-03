@@ -16,7 +16,6 @@ class Navbar extends Component {
 
 
   render() {
-    console.log(this.props.user);
     return (
       <div className='container-fluid px-0 mx-0'>
         <div className="row justify-content-center navbar px-0 mx-0">
@@ -58,11 +57,11 @@ class Navbar extends Component {
         </div>
         {this.props.smDown ?
           <div className={`d-flex flex-column align-items-center w-100 py-4 ${this.state.menuIsClicked ? 'menuDropped' : 'menu'}`}>
-            <p className='menuText pb-4'>Login</p>
+            <p onClick={() => { this.props.history.push('/Login'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Login</p>
             <div className='divider' />
-            <p className='menuText pb-4'>Sign up</p>
+            <p onClick={() => { this.props.history.push('/Signup'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Sign up</p>
             <div className='divider' />
-            <p className='menuText'>About us</p>
+            <p onClick={() => { this.props.history.push('/About'); this.setState({ menuIsClicked: false }) }} className='menuText'>About us</p>
           </div>
           : null}
       </div>

@@ -1,7 +1,7 @@
 const initialState = {
   email: null,
   id: null,
-  fetchingUser: true
+  fetchingUser: true,
 }
 
 export default function (state = initialState, action) {
