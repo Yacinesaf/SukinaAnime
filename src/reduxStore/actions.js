@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, signin } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })

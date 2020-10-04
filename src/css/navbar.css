@@ -32,7 +32,6 @@
   z-index: 100;
   transition: 0.2s ease-in;
   background-color: #5f27cd;
-  padding: 12px 0px;
 }
 
 .menu {
@@ -47,7 +46,7 @@
 .menuDropped {
   position: fixed;
   z-index: 40;
-  transform: translateY(72px);
+  transform: translateY(54px);
   background-color: #5f27cd;
   transition: 0.4s ease-in-out;
 }
@@ -190,5 +189,8 @@
   }
   .hamburger-inner::after {
     bottom: -10px;
+  }
+  .navbar {
+    padding: 12px 0px;
   }
 }

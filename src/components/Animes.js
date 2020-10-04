@@ -63,7 +63,7 @@ class Animes extends Component {
   render() {
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ padding: '130px 0px 60px' }}>
-        <div className='col-12 col-md-11' style={{ margin: '0px -5px' }}>
+        <div className='col-12 col-md-11' style={{ margin: this.props.smDown ? 0 : '0px -5px' }}>
           <div className='row justify-content-center mx-0'>
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
