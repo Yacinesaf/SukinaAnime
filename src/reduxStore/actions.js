@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, getMyFavorites } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -47,5 +47,13 @@ export const setRelatedAnimes = (category) => dispatch => {
 export const signOut = () => dispatch => {
   return logout().then(() => {
     dispatch({ type: 'SET_ID', payload: null })
+  })
+}
+
+export const setFavorites = () => dispatch => {
+  dispatch({ type: 'SET_FETCHING_FAVORITES', payload: true })
+  return getMyFavorites().then(res => {
+    dispatch({ type: 'SET_FAVORITES', payload: res })
+    dispatch({ type: 'SET_FETCHING_FAVORITES', payload: false })
   })
 }

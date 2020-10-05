@@ -101,5 +101,6 @@ export {
   getyRelatedAnimes,
   logout,
   login,
-  addFavoriteAnime
+  addFavoriteAnime,
+  getMyFavorites
 }
