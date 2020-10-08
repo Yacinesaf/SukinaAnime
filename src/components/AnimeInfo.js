@@ -9,14 +9,6 @@ import '../css/styles.css'
 import FavoriteIcon from './FavoriteIcon'
 
 class AnimeInfo extends Component {
-  constructor() {
-    super()
-    this.state = {
-      favorited: false
-    }
-  }
-
-
   componentDidMount() {
     window.scrollTo(0, 0)
     let name = this.props.location.pathname.split('/')
@@ -30,22 +22,18 @@ class AnimeInfo extends Component {
     }
   }
 
-  favoriteHandler = () => {
-    this.setState({ favorited: !this.state.favorited })
-  }
 
 
   render() {
     return (
-      <div style={{ paddingTop: 72 }}>
+      <div style={{ paddingTop: this.props.smDown ? 64 : 72 }}>
         {this.props.anime ?
           <div>
-            {this.props.smDown ? true ?
-              <div style={{ position: "absolute", right: 30, top: 90, height : 44, padding : 10, borderRadius : '100%', backgroundColor : 'rgba(33, 27, 27, 0.05)' }}>
-                <div />
-                <FavoriteIcon favorited={this.state.favorited} favoriteHandler={this.favoriteHandler} smDown={this.props.smDown} anime ={this.props.anime}  />
+            {this.props.smDown ?
+              <div style={{ position: "absolute", right: 30, top: 90, height: 44, padding: 10, borderRadius: '100%', backgroundColor: 'rgba(33, 27, 27, 0.05)' }}>
+                <FavoriteIcon anime={this.props.anime} smDown={this.props.smDown} location={this.props.location} />
               </div>
-              : null : null}
+              : null}
             <div style={{
               display: 'flex',
               justifyContent: 'center',
@@ -82,7 +70,7 @@ class AnimeInfo extends Component {
                         <div className='d-flex align-items-center'>
                           <p className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
                           {!this.props.smDown ? this.props.user ?
-                            <FavoriteIcon favorited={this.state.favorited} favoriteHandler={this.favoriteHandler}  />
+                            <FavoriteIcon location={this.props.location} anime={this.props.anime} />
                             : null
                             : null}
                         </div>

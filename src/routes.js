@@ -56,12 +56,10 @@ function Routes() {
   return (
     <div className='bg'>
       {<Navbar smDown={smDown(window)} history={history} />}
-      {
-        // <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
-        // <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
-        //<Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
-      }
-      <Route exact path='/' render={(props) => <Profile {...props} smDown={smDown(window)} history={history} />} />
+      <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history}  />} />
+      <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
+      <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
+      <Route exact path='/Profile' render={(props) => <Profile {...props} smDown={smDown(window)} history={history} />} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, getMyFavorites } from '../services/apiEndpoints'
+import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, getMyFavorites, addFavoriteAnime, removeFavoriteAnime } from '../services/apiEndpoints'
 
 export const setAnimes = (pageNum) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
@@ -55,5 +55,19 @@ export const setFavorites = () => dispatch => {
   return getMyFavorites().then(res => {
     dispatch({ type: 'SET_FAVORITES', payload: res })
     dispatch({ type: 'SET_FETCHING_FAVORITES', payload: false })
+  })
+}
+
+export const favoriteToggler = (obj) => dispatch => {
+  let { id, isFavorite, docId } = obj
+  if (isFavorite) {
+    return removeFavoriteAnime(docId).then(() => {
+      dispatch({ type: 'UPDATE_ANIMES_FAVORITES', payload: { id, isFavorite: false } })
+      dispatch({ type: 'UPDATE_ANIME_FAVORITE', payload: false })
+    })
+  }
+  return addFavoriteAnime(obj).then(() => {
+    dispatch({ type: 'UPDATE_ANIMES_FAVORITES', payload: { id, isFavorite: true } })
+    dispatch({ type: 'UPDATE_ANIME_FAVORITE', payload: true })
   })
 }

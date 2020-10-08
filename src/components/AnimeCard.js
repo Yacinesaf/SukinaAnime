@@ -1,21 +1,21 @@
 import React from 'react';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import '../css/styles.css'
 import '../css/animeCard.css'
+import FavoriteIcon from './FavoriteIcon';
+import { useLocation } from "react-router-dom";
+import { rateToFive } from '../services/helperFunctions'
 
-function AnimeCard({ obj, isUserLogged, isFavorite }) {
-  const rateToFive = (rate) => {
-    return (rate / 20).toFixed(2)
-  }
-
+function AnimeCard({ obj, smDown }) {
+  const location = useLocation();
 
   return (
-    <div className='card card_shadow text-white' style={{ width: '100%' }}>
+    <div className='card card_shadow text-white' style={{ width: '100%', position: 'relative' }}>
       <div className='card_image' style={{ backgroundImage: `url(${obj.attributes.posterImage.small})` }} />
       <div style={{ padding: 10 }}>
         <p className='bold_text title text'>{obj.attributes.canonicalTitle}</p>
-        {/*isUserLogged ? isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon /> : null*/}
+        <div style={{ position: "absolute", right: 10, top: 10, height: 48, padding: 10, borderRadius: '100%', backgroundColor: 'rgba(33, 27, 27, 0.4)' }}>
+          <FavoriteIcon anime={obj} smDown={smDown} location={location} />
+        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <p className='bold_text text'>Episodes : {obj.attributes.episodeCount}</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>

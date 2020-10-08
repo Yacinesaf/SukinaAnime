@@ -9,8 +9,6 @@ class Navbar extends Component {
     super()
     this.state = {
       menuIsClicked: false,
-      anchorEl: null
-
     }
   }
 
@@ -23,7 +21,7 @@ class Navbar extends Component {
             <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
             {this.props.user ?
               <div className='d-flex align-items-center'>
-                <div className='avatar' style={{ height: 48, width: 48 }} />
+                <div className='avatar' style={{ height: this.props.smDown ? 36 : 48, width: this.props.smDown ? 36 : 48 }} />
                 <div className='px-2'></div>
                 <svg onClick={() => {
                   this.props.signOut()

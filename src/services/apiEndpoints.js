@@ -6,7 +6,7 @@ require('firebase/auth')
 const getAnimes = (pageNum) => {
   return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
     let user = firebase.auth().currentUser;
-    // if (!user) return res.data
+    if (!user) return res.data
     return getMyFavorites().then(resp => {
       if (!resp) {
         let nonFavoritesAnimes = res.data.data.map(x => {
@@ -62,15 +62,19 @@ const addFavoriteAnime = (obj) => {
   let objWithTime = { ...obj, date: firebase.firestore.Timestamp.fromDate(new Date()) }
   return db.collection("favorites").add(objWithTime)
     .then(function (doc) {
-      return { ...obj, id: doc.id }
+      return { ...obj, docId: doc.id }
     })
+}
+const removeFavoriteAnime = (id) => {
+  let db = firebase.firestore(firebaseApp);
+  return db.collection("favorites").delete(id)
 }
 
 const getMyFavorites = () => {
   var user = firebase.auth().currentUser;
   let db = firebase.firestore(firebaseApp);
   // return db.collection('favorites').where('userId', '==', user.uid)
-  return db.collection('favorites')
+  return db.collection('favorites').orderBy('date', 'desc')
     .get()
     .then(function (querySnapshot) {
       let favorites = querySnapshot.docs.map(doc => {
@@ -82,16 +86,6 @@ const getMyFavorites = () => {
     })
 }
 
-// const getAnimesByGenra = (genre) => {
-//   return axios.get(`https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]=0?filter[categories]=${genre}`).then(res => {
-//     console.log(res)
-//   })
-// }
-// const getAnimesByDate = () => {
-//   return axios.get('https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]=0').then(res => {
-//     console.log(res)
-//   })
-// }
 
 export {
   getAnimes,
@@ -102,5 +96,6 @@ export {
   logout,
   login,
   addFavoriteAnime,
-  getMyFavorites
+  getMyFavorites,
+  removeFavoriteAnime
 }
