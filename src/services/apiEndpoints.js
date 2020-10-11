@@ -16,7 +16,8 @@ const getAnimes = (pageNum) => {
       }
       let favoritesIds = resp.map(x => x.id)
       let animes = res.data.data.map(x => {
-        return { ...x, isFavorite: favoritesIds.includes(x.id) }
+        let match = resp.find(element => element.id === x.id)
+        return { ...x, isFavorite: favoritesIds.includes(x.id), docId: match ? match.docId : null }
       })
       return { data: animes, meta: res.data.meta }
     })
@@ -67,7 +68,7 @@ const addFavoriteAnime = (obj) => {
 }
 const removeFavoriteAnime = (id) => {
   let db = firebase.firestore(firebaseApp);
-  return db.collection("favorites").delete(id)
+  return db.collection("favorites").doc(id).delete()
 }
 
 const getMyFavorites = () => {

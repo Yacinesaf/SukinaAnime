@@ -24,6 +24,5 @@ export default function (state = initialState, action) {
       })
       if (index >= 0) copy[index].isFavorite = action.payload.isFavorite
       return { ...state, animes: copy }
-
   }
 }

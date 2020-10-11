@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 require('firebase/auth')
 
 
+
 function useWindowSize() {
   const [windowWidth, setWindowWidth] = useState(undefined);
 
@@ -33,6 +34,7 @@ function useWindowSize() {
 
 
 function Routes() {
+  const [isInitialized, setIsInitialized] = useState(false)
   const location = useLocation();
   const history = useHistory();
   const window = useWindowSize();
@@ -43,9 +45,9 @@ function Routes() {
       return false
     }
   }
-
-
+  
   firebase.auth().onAuthStateChanged(function (user) {
+    setIsInitialized(true)
     if (user) {
       store.dispatch({ type: 'SET_ID', payload: user.uid })
       store.dispatch({ type: 'SET_EMAIL', payload: user.email })
@@ -54,12 +56,18 @@ function Routes() {
     }
   });
   return (
-    <div className='bg'>
-      {<Navbar smDown={smDown(window)} history={history} />}
-      <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history}  />} />
-      <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
-      <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
-      <Route exact path='/Profile' render={(props) => <Profile {...props} smDown={smDown(window)} history={history} />} />
+    <div>
+      {isInitialized ?
+        <div className='bg'>
+          < Navbar smDown={smDown(window)} history={history} />
+          <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
+          <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
+          <Route exact path='/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
+          <Route exact path='/Profile' render={(props) => <Profile {...props} smDown={smDown(window)} history={history} />} />
+        </div >
+        :
+        <div>loading</div>
+      }
     </div>
   );
 }

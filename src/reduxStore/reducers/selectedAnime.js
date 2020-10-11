@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils"
-
 const initialState = {
   selectedAnime: null,
   fetching: true,
@@ -20,9 +18,8 @@ export default function (state = initialState, action) {
     case 'SET_FETCHING':
       return { ...state, fetching: action.payload }
     case 'UPDATE_ANIME_FAVORITE':
-      let copy = state.selectedAnime;
+      let copy = { ...state.selectedAnime };
       copy.isFavorite = action.payload
-      console.log(action.payload);
       return { ...state, selectedAnime: copy }
   }
 }
