@@ -27,7 +27,16 @@ const getAnimes = (pageNum) => {
 }
 const getAnimeByName = (name) => {
   return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=1&filter[text]=${name}`).then(res => {
-    return res.data
+    const anime = res.data.data[0]
+    let user = firebase.auth().currentUser;
+    if (!user) return anime
+    return getMyFavorites().then(resp => {
+      if (!resp) {
+        return { ...anime, isFavorite: false }
+      }
+      let match = resp.find(element => element.id === anime.id)
+      return { ...anime, isFavorite: Boolean(match), docId: match ? match.docId : null }
+    })
   })
 
 
@@ -74,8 +83,7 @@ const removeFavoriteAnime = (id) => {
 const getMyFavorites = () => {
   var user = firebase.auth().currentUser;
   let db = firebase.firestore(firebaseApp);
-  // return db.collection('favorites').where('userId', '==', user.uid)
-  return db.collection('favorites').orderBy('date', 'desc')
+  return db.collection('favorites').orderBy('date', 'desc').where('userId', '==', user.uid)
     .get()
     .then(function (querySnapshot) {
       let favorites = querySnapshot.docs.map(doc => {

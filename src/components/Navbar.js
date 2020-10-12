@@ -21,7 +21,7 @@ class Navbar extends Component {
             <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
             {this.props.user ?
               <div className='d-flex align-items-center'>
-                <div className='avatar' style={{ height: this.props.smDown ? 36 : 48, width: this.props.smDown ? 36 : 48 }} />
+                <div onClick={()=> {this.props.history.push('/profile')}} className='avatar' style={{ height: this.props.smDown ? 36 : 48, width: this.props.smDown ? 36 : 48 }} />
                 <div className='px-2'></div>
                 <svg onClick={() => {
                   this.props.signOut()
@@ -47,8 +47,8 @@ class Navbar extends Component {
                 </button>
                 :
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div onClick={() => { this.props.history.replace('/Login') }} className='login bold_text'>Login</div>
-                  <div onClick={() => { this.props.history.replace('/Signup') }} className='signup bold_text'>Sign up</div>
+                  <div onClick={() => { this.props.history.replace('/sign/Login') }} className='login bold_text'>Login</div>
+                  <div onClick={() => { this.props.history.replace('/sign/Signup') }} className='signup bold_text'>Sign up</div>
                 </div>
             }
           </div>

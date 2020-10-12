@@ -13,9 +13,7 @@ function AnimeCard({ obj, smDown }) {
       <div className='card_image' style={{ backgroundImage: `url(${obj.attributes.posterImage.small})` }} />
       <div style={{ padding: 10 }}>
         <p className='bold_text title text'>{obj.attributes.canonicalTitle}</p>
-        <div style={{ position: "absolute", right: 10, top: 10, height: 48, padding: 10, borderRadius: '100%', backgroundColor: 'rgba(33, 27, 27, 0.4)' }}>
-          <FavoriteIcon anime={obj} smDown={smDown} location={location} />
-        </div>
+        <FavoriteIcon animeId={obj.id} smDown={smDown} location={location} />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <p className='bold_text text'>Episodes : {obj.attributes.episodeCount}</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>

@@ -22,9 +22,9 @@ export const setCurrentPage = (page) => dispatch => {
 export const setSelectedAnimeByFetch = (name) => dispatch => {
   dispatch({ type: 'SET_FETCHING', payload: true })
   return getAnimeByName(name).then(res => {
-    const categories = res.data[0].relationships.categories.data
+    const categories = res.relationships.categories.data
     dispatch({ type: 'SET_CATEGORY_ID', payload: categories[Math.floor(Math.random() * categories.length)].id })
-    dispatch({ type: 'SET_SELECTED_ANIME', payload: res.data[0] })
+    dispatch({ type: 'SET_SELECTED_ANIME', payload: res})
     dispatch({ type: 'SET_FETCHING', payload: false })
   })
 }

@@ -33,15 +33,12 @@ class Profile extends Component {
                   </div>
                 ))
               }
-              <div className='col-'>
-              </div>
             </div>
           </div>
         </div>
       )
     }
     this.props.history.push('/')
-
   }
 }
 

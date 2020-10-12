@@ -5,12 +5,18 @@ import { favoriteToggler } from '../reduxStore/actions'
 
 class FavoriteIcon extends Component {
   render() {
+    const anime = this.props.animes.find(x => {
+      return x.id === this.props.animeId
+    })
     return (
-      <div onClick={(e) => {
-        e.stopPropagation()
-        this.props.favoriteToggler(this.props.anime)
-      }}>
-        {this.props.user ? this.props.anime.isFavorite ?
+      <div style={this.props.location ?
+        { position: "absolute", right: this.props.location.pathname === '/' ? 10 : 30, top: this.props.location.pathname === '/' ? 10 : 90, height: 48, padding: 10, borderRadius: '100%', backgroundColor: 'rgba(33, 27, 27, 0.4)' }
+        : null}
+        onClick={(e) => {
+          e.stopPropagation()
+          this.props.favoriteToggler(anime)
+        }}>
+        {this.props.user ? anime.isFavorite ?
           <svg
             style={{ cursor: 'pointer' }}
             width={this.props.smDown ? '1.75em' : '2em'}
@@ -41,7 +47,8 @@ class FavoriteIcon extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.id,
-
+  animes: state.animes.animes,
+  selectedAnime: state.selectedAnime.selectedAnime
 })
 
 export default connect(mapStateToProps, { favoriteToggler })(FavoriteIcon);
