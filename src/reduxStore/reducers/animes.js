@@ -2,7 +2,7 @@ const initialState = {
   animes: [],
   totalCount: null,
   fetchingAnimes: true,
-  currentPage: 1,
+  currentPage: 1
 }
 
 export default function (state = initialState, action) {
@@ -22,7 +22,10 @@ export default function (state = initialState, action) {
       let index = copy.findIndex(x => {
         return x.id === action.payload.id
       })
-      if (index >= 0) copy[index].isFavorite = action.payload.isFavorite
+      if (index >= 0) {
+        copy[index].isFavorite = action.payload.isFavorite
+        if (action.payload.docId) copy[index].docId = action.payload.docId
+      }
       return { ...state, animes: copy }
   }
 }

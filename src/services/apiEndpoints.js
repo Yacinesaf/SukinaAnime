@@ -17,7 +17,9 @@ const getAnimes = (pageNum) => {
       let favoritesIds = resp.map(x => x.id)
       let animes = res.data.data.map(x => {
         let match = resp.find(element => element.id === x.id)
-        return { ...x, isFavorite: favoritesIds.includes(x.id), docId: match ? match.docId : null }
+        const obj = { ...x, isFavorite: favoritesIds.includes(x.id) }
+        if (match) obj.docId = match.docId
+        return obj
       })
       return { data: animes, meta: res.data.meta }
     })
@@ -68,12 +70,11 @@ const login = (email, password) => {
 }
 
 const addFavoriteAnime = (obj) => {
+  var user = firebase.auth().currentUser;
   let db = firebase.firestore(firebaseApp);
-  let objWithTime = { ...obj, date: firebase.firestore.Timestamp.fromDate(new Date()) }
+  let objWithTime = { ...obj, date: firebase.firestore.Timestamp.fromDate(new Date()), userId: user.uid }
   return db.collection("favorites").add(objWithTime)
-    .then(function (doc) {
-      return { ...obj, docId: doc.id }
-    })
+    .then(doc => doc.id)
 }
 const removeFavoriteAnime = (id) => {
   let db = firebase.firestore(firebaseApp);
@@ -83,7 +84,9 @@ const removeFavoriteAnime = (id) => {
 const getMyFavorites = () => {
   var user = firebase.auth().currentUser;
   let db = firebase.firestore(firebaseApp);
-  return db.collection('favorites').orderBy('date', 'desc').where('userId', '==', user.uid)
+  return db.collection('favorites')
+    .orderBy('date', 'desc')
+    .where('userId', '==', user.uid)
     .get()
     .then(function (querySnapshot) {
       let favorites = querySnapshot.docs.map(doc => {

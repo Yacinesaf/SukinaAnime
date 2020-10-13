@@ -52,6 +52,7 @@ function Routes() {
       store.dispatch({ type: 'SET_ID', payload: user.uid })
       store.dispatch({ type: 'SET_EMAIL', payload: user.email })
     } else {
+      if (location.pathname === '/profile') history.push('/')
       store.dispatch({ type: 'SET_ID', payload: null })
     }
   });
@@ -59,7 +60,7 @@ function Routes() {
     <div>
       {isInitialized ?
         <div className='bg'>
-          < Navbar smDown={smDown(window)} history={history} />
+          <Navbar smDown={smDown(window)} history={history} />
           <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
           <Route exact path='/Anime/:animeName' render={(props) => <AnimeInfo {...props} smDown={smDown(window)} history={history} location={location} />} />
           <Route exact path='/profile' render={(props) => <Profile {...props} smDown={smDown(window)} history={history} />} />

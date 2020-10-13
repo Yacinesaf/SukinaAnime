@@ -25,13 +25,12 @@ class AnimeInfo extends Component {
 
 
   render() {
-    console.log(this.props.anime);
     return (
       <div style={{ paddingTop: this.props.smDown ? 64 : 72 }}>
         {this.props.anime ?
           <div>
             {this.props.smDown ?
-              <FavoriteIcon animeId={this.props.anime.id} smDown={this.props.smDown} location={this.props.location} />
+              <FavoriteIcon isFromSelectedAnime={true} animeId={this.props.anime.id} smDown={this.props.smDown} />
               : null}
             <div style={{
               display: 'flex',
@@ -69,7 +68,7 @@ class AnimeInfo extends Component {
                         <div className='d-flex align-items-center'>
                           <p className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
                           {!this.props.smDown ? this.props.user ?
-                            <FavoriteIcon animeId={this.props.anime.id} />
+                            <FavoriteIcon isFromSelectedAnime={true} animeId={this.props.anime.id} />
                             : null
                             : null}
                         </div>

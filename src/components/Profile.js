@@ -8,7 +8,7 @@ class Profile extends Component {
   componentDidMount() {
     this.props.setFavorites()
   }
-
+  
   render() {
     if (this.props.user) {
       return (
@@ -37,8 +37,9 @@ class Profile extends Component {
           </div>
         </div>
       )
+    } else {
+      return null
     }
-    this.props.history.push('/')
   }
 }
 

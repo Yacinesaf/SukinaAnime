@@ -66,8 +66,8 @@ export const favoriteToggler = (obj) => dispatch => {
       dispatch({ type: 'UPDATE_ANIME_FAVORITE', payload: false })
     })
   }
-  return addFavoriteAnime(obj).then(() => {
-    dispatch({ type: 'UPDATE_ANIMES_FAVORITES', payload: { id, isFavorite: true } })
-    dispatch({ type: 'UPDATE_ANIME_FAVORITE', payload: true })
+  return addFavoriteAnime(obj).then((docId) => {
+    dispatch({ type: 'UPDATE_ANIMES_FAVORITES', payload: { id, isFavorite: true, docId } })
+    dispatch({ type: 'UPDATE_ANIME_FAVORITE', payload: { isFavorite: true, docId } })
   })
 }

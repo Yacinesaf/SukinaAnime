@@ -18,8 +18,8 @@ export default function (state = initialState, action) {
     case 'SET_FETCHING':
       return { ...state, fetching: action.payload }
     case 'UPDATE_ANIME_FAVORITE':
-      let copy = { ...state.selectedAnime };
-      copy.isFavorite = action.payload
+      let copy = { ...state.selectedAnime, isFavorite: action.payload.isFavorite }
+      if (action.payload.docId) copy.docId = action.payload.docId
       return { ...state, selectedAnime: copy }
   }
 }

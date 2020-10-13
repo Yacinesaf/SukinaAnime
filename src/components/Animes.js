@@ -74,7 +74,7 @@ class Animes extends Component {
                   }}
                   key={x.id}
                   style={{ margin: this.props.smDown ? '20px 0px' : 20, cursor: 'pointer' }}>
-                  <AnimeCard smDown={this.props.smDown} obj={x} />
+                  <AnimeCard user={this.props.user} smDown={this.props.smDown} obj={x} />
                 </div>
               ))
             }

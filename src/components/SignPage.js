@@ -51,7 +51,7 @@ class SignPage extends Component {
   }
 
   render() {
-    let location = this.props.location.pathname.split('/')[1];
+    let location = this.props.location.pathname.split('/')[2];
 
     return (
       <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
@@ -84,14 +84,14 @@ class SignPage extends Component {
                 if (location !== 'Login') {
                   newUser(this.state.email, this.state.password)
                   this.props.history.push('/')
+                } else {
+                  login(this.state.email, this.state.password).then(() => {
+                    this.props.history.push('/')
+                  }).catch((error) => {
+                    this.snackbar()
+                    this.setState({ showSnackbar: true })
+                  })
                 }
-              } else {
-                login(this.state.email, this.state.password).then(() => {
-                  this.props.history.push('/')
-                }).catch((error) => {
-                  this.snackbar()
-                  this.setState({ showSnackbar: true })
-                })
               }
             }} className={` mt-5 ${this.isFormValid() ? 'button' : 'button-disabled'}`}>
               {location === 'Login' ? 'Login' : 'Sign up'}

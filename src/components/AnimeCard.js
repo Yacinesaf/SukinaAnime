@@ -5,7 +5,7 @@ import FavoriteIcon from './FavoriteIcon';
 import { useLocation } from "react-router-dom";
 import { rateToFive } from '../services/helperFunctions'
 
-function AnimeCard({ obj, smDown }) {
+function AnimeCard({ obj, smDown, user }) {
   const location = useLocation();
 
   return (
@@ -13,7 +13,9 @@ function AnimeCard({ obj, smDown }) {
       <div className='card_image' style={{ backgroundImage: `url(${obj.attributes.posterImage.small})` }} />
       <div style={{ padding: 10 }}>
         <p className='bold_text title text'>{obj.attributes.canonicalTitle}</p>
-        <FavoriteIcon animeId={obj.id} smDown={smDown} location={location} />
+        {user ?
+          <FavoriteIcon animeId={obj.id} smDown={smDown} location={location} />
+          : null}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <p className='bold_text text'>Episodes : {obj.attributes.episodeCount}</p>
           <div style={{ display: 'flex', alignItems: 'center' }}>
