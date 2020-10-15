@@ -4,6 +4,7 @@ import { setAnimes, setSelectedAnime, setRelatedAnimes, setCurrentPage } from '.
 import AnimeCard from './AnimeCard'
 import '../css/styles.css'
 import '../css/animes.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -70,11 +71,12 @@ class Animes extends Component {
                 <div className='col-11 col-md-3 px-0'
                   onClick={() => {
                     this.props.setSelectedAnime(x)
-                    this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`)
                   }}
                   key={x.id}
                   style={{ margin: this.props.smDown ? '20px 0px' : 20, cursor: 'pointer' }}>
-                  <AnimeCard user={this.props.user} smDown={this.props.smDown} obj={x} />
+                  <Link style={{textDecoration : 'none'}} to={`/Anime/${x.attributes.canonicalTitle}`}>
+                    <AnimeCard user={this.props.user} smDown={this.props.smDown} obj={x} />
+                  </Link>
                 </div>
               ))
             }

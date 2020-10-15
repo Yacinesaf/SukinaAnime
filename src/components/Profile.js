@@ -3,12 +3,14 @@ import '../css/styles.css'
 import { connect } from 'react-redux'
 import { setFavorites, setSelectedAnime, setRelatedAnimes } from '../reduxStore/actions'
 import { titleFormater } from '../services/helperFunctions'
+import '../css/styles.css'
+import loading from '../assets/loading.svg'
 
 class Profile extends Component {
   componentDidMount() {
     this.props.setFavorites()
   }
-  
+
   render() {
     if (this.props.user) {
       return (
@@ -17,9 +19,12 @@ class Profile extends Component {
             <div className='row mx-0 justify-content-center'>
               <div className='avatar' style={{ cursor: 'none', height: this.props.smDown ? 80 : 160, width: this.props.smDown ? 80 : 160 }}></div>
             </div>
-            <div className='row mx-0' style={{ padding: this.props.smDown ? '40px 0px' : '100px 120px' }}>
+            <div className={`row mx-0 ${this.props.fetchingFavorites ? 'justify-content-center' : 'unset'}`} style={{ padding: this.props.smDown ? '40px 0px' : '100px 120px' }}>
               {this.props.fetchingFavorites ?
-                null :
+                <div className='col-11 col-md-6'>
+                  <img alt='loading' src={loading} style={{ width: '100%' }} />
+                </div>
+                :
                 this.props.myFavorites.map((x, i) => (
                   <div onClick={() => {
                     this.props.setSelectedAnime(x)
