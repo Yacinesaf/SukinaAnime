@@ -7,9 +7,23 @@ import placeHolder from '../assets/noImageHolder.jpg'
 import '../css/animeInfo.css'
 import '../css/styles.css'
 import FavoriteIcon from './FavoriteIcon'
+import { Link } from 'react-router-dom'
 
 class AnimeInfo extends Component {
   componentDidMount() {
+    this.initilizeAnime()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      let name = this.props.location.pathname.split('/')
+      this.props.setSelectedAnimeByFetch(name[name.length - 1]).then(() => {
+        this.props.setRelatedAnimes(this.props.categoryId)
+      })
+    }
+  }
+
+  initilizeAnime = () => {
     window.scrollTo(0, 0)
     let name = this.props.location.pathname.split('/')
     if (this.props.categoryId) {
@@ -21,8 +35,6 @@ class AnimeInfo extends Component {
       })
     }
   }
-
-
 
   render() {
     return (
@@ -109,17 +121,16 @@ class AnimeInfo extends Component {
                       <div className='row mx-0 px-0' style={{ padding: '20px 10px' }}>
                         {!this.props.fetching ?
                           this.props.related.map((x, i) => (
-                            <div onClick={() => {
-                              this.props.setSelectedAnime(x)
+                            <Link onClick={() => {
                               let categories = x.relationships.categories.data
                               this.props.setRelatedAnimes(categories[Math.floor(Math.random() * categories.length)].id)
-                              this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`)
-                              window.scrollTo(0,0)
-                            }}
-                              key={i} className='col-6 col-md-2' style={{ padding: 10, cursor: 'pointer' }}>
-                              <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
-                              <div className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</div>
-                            </div>
+                              window.scrollTo(0, 0)
+                            }} key={i} className='col-6 col-md-2' style={{ padding: 10, cursor: 'pointer', textDecoration : 'none' }} to={`/Anime/${x.attributes.canonicalTitle}`}>
+                              <div>
+                                <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
+                                <div className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</div>
+                              </div>
+                            </Link>
                           ))
                           :
                           Array(6).fill(0).map((x, i) => (

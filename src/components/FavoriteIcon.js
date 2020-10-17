@@ -6,13 +6,13 @@ import { favoriteToggler } from '../reduxStore/actions'
 class FavoriteIcon extends Component {
   render() {
     let anime = null
+    let animeFromList = null
     if (this.props.animes.length) {
-      anime = this.props.animes.find(x => {
+      animeFromList = this.props.animes.find(x => {
         return x.id === this.props.animeId
       })
-    } else {
-      anime = { ...this.props.selectedAnime }
     }
+    anime = animeFromList ? animeFromList : { ...this.props.selectedAnime }
 
     return (
       <div style={{

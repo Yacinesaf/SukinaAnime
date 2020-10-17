@@ -91,6 +91,7 @@ const getMyFavorites = () => {
     .then(function (querySnapshot) {
       let favorites = querySnapshot.docs.map(doc => {
         let obj = doc.data();
+        obj['isFavortie'] = true
         obj['docId'] = doc.id
         return obj
       })

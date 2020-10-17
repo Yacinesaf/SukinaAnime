@@ -60,7 +60,7 @@ function Routes() {
   });
   return (
     <div>
-      {false ?
+      {isInitialized ?
         <div className='bg'>
           <Navbar smDown={smDown(window)} history={history} />
           <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
