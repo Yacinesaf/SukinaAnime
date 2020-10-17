@@ -7,6 +7,7 @@ import store from './reduxStore/store'
 import AnimeInfo from './components/AnimeInfo'
 import SignPage from './components/SignPage';
 import './css/styles.css'
+import loading from './assets/loading.svg'
 import Profile from './components/Profile';
 import firebase from 'firebase'
 require('firebase/auth')
@@ -46,7 +47,7 @@ function Routes() {
       return false
     }
   }
-  
+
   firebase.auth().onAuthStateChanged(function (user) {
     setIsInitialized(true)
     if (user) {
@@ -59,7 +60,7 @@ function Routes() {
   });
   return (
     <div>
-      {isInitialized ?
+      {false ?
         <div className='bg'>
           <Navbar smDown={smDown(window)} history={history} />
           <Route exact path='/' render={(props) => <Animes {...props} smDown={smDown(window)} history={history} />} />
@@ -68,7 +69,9 @@ function Routes() {
           <Route exact path='/sign/:signAction' render={(props) => <SignPage {...props} smDown={smDown(window)} location={location} history={history} />} />
         </div>
         :
-        <div>loading</div>
+        <div className='bg d-flex justify-content-center align-items-center'>
+          <img alt='loading' height={smDown(window) ? 175 : 600} src={loading} />
+        </div>
       }
     </div>
   );
