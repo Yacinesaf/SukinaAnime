@@ -55,11 +55,9 @@ class Navbar extends Component {
         </div>
         {this.props.smDown ?
           <div className={`d-flex flex-column align-items-center w-100 py-4 ${this.state.menuIsClicked ? 'menuDropped' : 'menu'}`}>
-            <div onClick={() => { this.props.history.push('/Login'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Login</div>
+            <div onClick={() => { this.props.history.push('/sign/Login'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Login</div>
             <div className='divider' />
-            <div onClick={() => { this.props.history.push('/Signup'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Sign up</div>
-            <div className='divider' />
-            <div onClick={() => { this.props.history.push('/About'); this.setState({ menuIsClicked: false }) }} className='menuText'>About us</div>
+            <div onClick={() => { this.props.history.push('/sign/Signup'); this.setState({ menuIsClicked: false }) }} className='menuText'>Sign up</div>
           </div>
           : null}
       </div>

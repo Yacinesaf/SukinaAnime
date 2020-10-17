@@ -1,8 +1,8 @@
 import { getAnimes, getAnimeByName, getyRelatedAnimes, getSelectedAnimeCategory, logout, getMyFavorites, addFavoriteAnime, removeFavoriteAnime } from '../services/apiEndpoints'
 
-export const setAnimes = (pageNum) => dispatch => {
+export const setAnimes = (pageNum, search) => dispatch => {
   dispatch({ type: 'SET_FETCHING_ANIMES', payload: true })
-  return getAnimes(pageNum).then(res => {
+  return getAnimes(pageNum, search).then(res => {
     dispatch({ type: 'SET_ANIMES', payload: res.data })
     dispatch({ type: 'SET_TOTAL_COUNT', payload: res.meta.count })
     dispatch({ type: 'SET_FETCHING_ANIMES', payload: false })

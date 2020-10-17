@@ -50,11 +50,29 @@ class SignPage extends Component {
     }, 3000);
   }
 
+  handleKeyPress = (event, location) => {
+    if (this.isFormValid()) {
+      if (event.key === 'Enter') {
+        if (location !== 'Login') {
+          newUser(this.state.email, this.state.password)
+          this.props.history.push('/')
+        } else {
+          login(this.state.email, this.state.password).then(() => {
+            this.props.history.push('/')
+          }).catch((error) => {
+            this.snackbar()
+            this.setState({ showSnackbar: true })
+          })
+        }
+      }
+    }
+  }
+
   render() {
     let location = this.props.location.pathname.split('/')[2];
 
     return (
-      <div className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
+      <div onKeyPress={(e) => { this.handleKeyPress(e, location) }} className='row justify-content-center mx-0 px-0' style={{ height: '100vh', paddingTop: this.props.smDown ? 0 : 72 }}>
         <div className='col-10 col-lg-5 col-xl-4 d-flex align-items-center p-0 pr-lg-5'>
           <form style={{ width: 'inherit' }}>
             <h1 className={this.props.smDown ? 'pageName-mobile' : 'pageName'}>{location === 'Login' ? 'Log in' : 'Sign up'}</h1>

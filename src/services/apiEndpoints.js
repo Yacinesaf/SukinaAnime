@@ -3,8 +3,8 @@ import firebaseApp from '../firebase'
 import firebase from 'firebase'
 require('firebase/auth')
 
-const getAnimes = (pageNum) => {
-  return axios.get(`https://kitsu.io/api/edge/anime?include=categories&page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
+const getAnimes = (pageNum, search) => {
+  return axios.get(`https://kitsu.io/api/edge/anime?include=categories${search ? '&filter[text]=' + search : ''}&page[limit]=12&page[offset]=${(pageNum - 1) * 12}`).then(res => {
     let user = firebase.auth().currentUser;
     if (!user) return res.data
     return getMyFavorites().then(resp => {
@@ -109,5 +109,5 @@ export {
   login,
   addFavoriteAnime,
   getMyFavorites,
-  removeFavoriteAnime
+  removeFavoriteAnime,
 }

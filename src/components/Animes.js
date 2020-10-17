@@ -5,12 +5,14 @@ import AnimeCard from './AnimeCard'
 import '../css/styles.css'
 import '../css/animes.css'
 import { Link } from 'react-router-dom'
+import Searchbar from './Searchbar'
 
 
 
 class Animes extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
+    
     this.props.setAnimes(this.props.currentPage)
   }
 
@@ -57,8 +59,9 @@ class Animes extends Component {
 
   render() {
     return (
-      <div className='row justify-content-center mx-0 px-0' style={{ padding: '130px 0px 60px' }}>
+      <div className='row justify-content-center mx-0 px-0' style={{ padding: this.props.smDown ? '100px 0px 60px' : '130px 0px 60px' }}>
         <div className='col-11 px-0' style={{ margin: this.props.smDown ? 0 : '0px -5px' }}>
+          <Searchbar smDown={this.props.smDown} />
           <div className='row justify-content-center mx-0'>
             {this.props.fetching ?
               Array(12).fill(0).map((x, i) => (
@@ -74,7 +77,7 @@ class Animes extends Component {
                   }}
                   key={x.id}
                   style={{ margin: this.props.smDown ? '20px 0px' : 20, cursor: 'pointer' }}>
-                  <Link style={{textDecoration : 'none'}} to={`/Anime/${x.attributes.canonicalTitle}`}>
+                  <Link style={{ textDecoration: 'none' }} to={`/Anime/${x.attributes.canonicalTitle}`}>
                     <AnimeCard user={this.props.user} smDown={this.props.smDown} obj={x} />
                   </Link>
                 </div>
