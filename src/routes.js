@@ -6,8 +6,9 @@ import Animes from './components/Animes';
 import store from './reduxStore/store'
 import AnimeInfo from './components/AnimeInfo'
 import SignPage from './components/SignPage';
-import firebase from 'firebase'
+import './css/styles.css'
 import Profile from './components/Profile';
+import firebase from 'firebase'
 require('firebase/auth')
 
 
