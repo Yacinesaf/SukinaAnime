@@ -18,7 +18,7 @@ class Navbar extends Component {
       <div className='container-fluid px-0 mx-0'>
         <div className="row justify-content-center navbar px-0 mx-0">
           <div className='col-10 col-md-11 d-flex justify-content-between align-items-center px-0 mx-0'>
-            <p className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</p>
+            <div className='site_name' onClick={() => { this.props.history.push('/') }}>Sukina</div>
             {this.props.user ?
               <div className='d-flex align-items-center'>
                 <div onClick={()=> {this.props.history.push('/profile')}} className='avatar' style={{ height: this.props.smDown ? 36 : 48, width: this.props.smDown ? 36 : 48 }} />
@@ -55,11 +55,11 @@ class Navbar extends Component {
         </div>
         {this.props.smDown ?
           <div className={`d-flex flex-column align-items-center w-100 py-4 ${this.state.menuIsClicked ? 'menuDropped' : 'menu'}`}>
-            <p onClick={() => { this.props.history.push('/Login'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Login</p>
+            <div onClick={() => { this.props.history.push('/Login'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Login</div>
             <div className='divider' />
-            <p onClick={() => { this.props.history.push('/Signup'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Sign up</p>
+            <div onClick={() => { this.props.history.push('/Signup'); this.setState({ menuIsClicked: false }) }} className='menuText pb-4'>Sign up</div>
             <div className='divider' />
-            <p onClick={() => { this.props.history.push('/About'); this.setState({ menuIsClicked: false }) }} className='menuText'>About us</p>
+            <div onClick={() => { this.props.history.push('/About'); this.setState({ menuIsClicked: false }) }} className='menuText'>About us</div>
           </div>
           : null}
       </div>

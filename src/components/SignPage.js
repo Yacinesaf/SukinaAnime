@@ -67,7 +67,7 @@ class SignPage extends Component {
               type='text'
               value={this.state.email}
               placeholder='email@gmail.com' />
-            {!this.isEmailValid(this.state.email) ? <p className='error-text pt-2'>Please enter a valid email</p> : null}
+            {!this.isEmailValid(this.state.email) ? <div className='error-text pt-2'>Please enter a valid email</div> : null}
             <div className='py-2' />
             <label htmlFor='password' className='py-1 py-md-1 field-title'>Password</label>
             <input
@@ -78,7 +78,7 @@ class SignPage extends Component {
               type='password'
               value={this.state.password}
               placeholder='Password' />
-            {!this.isPasswordValid(this.state.password) ? <p className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</p> : null}
+            {!this.isPasswordValid(this.state.password) ? <div className='error-text pt-2'>Password must contain at least 8 characters, including one uppercase letter and a number</div> : null}
             <div onClick={() => {
               if (this.isFormValid()) {
                 if (location !== 'Login') {

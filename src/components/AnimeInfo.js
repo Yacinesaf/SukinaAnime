@@ -50,15 +50,15 @@ class AnimeInfo extends Component {
                     <div className='col-2' style={{ transform: 'translateY(-120px)' }}>
                       <img alt='poster' src={this.props.anime.attributes.posterImage.small} width={'100%'} style={{ boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)' }} />
                       <div style={{ padding: '30px 0px' }}>
-                        <p className='info'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
-                        <p className='info'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength ? this.props.anime.attributes.episodeLength : 24} min</p>
-                        <p className='info'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
-                        <p className='info'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</p>
-                        <p className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</p>
-                        <p className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</p>
-                        <p className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</p>
-                        {this.props.anime.attributes.nsfw ? <p className='info bold_text'>NSFW</p> : null}
-                        <p className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</p>
+                        <div className='info'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</div>
+                        <div className='info'><strong>Episodes duration :</strong> {this.props.anime.attributes.episodeLength ? this.props.anime.attributes.episodeLength : 24} min</div>
+                        <div className='info'><strong>Status :</strong> {this.props.anime.attributes.status}</div>
+                        <div className='info'><strong>Rating Rank :</strong> {this.props.anime.attributes.ratingRank}</div>
+                        <div className='info'><strong>Start date :</strong> {this.props.anime.attributes.startDate}</div>
+                        <div className='info'><strong>End date :</strong> {this.props.anime.attributes.endDate ? this.props.anime.attributes.endDate : 'Not finished/Dropped'}</div>
+                        <div className='info'><strong>Show Type :</strong> {this.props.anime.attributes.showType}</div>
+                        {this.props.anime.attributes.nsfw ? <div className='info bold_text'>NSFW</div> : null}
+                        <div className='infoLast'><strong>Age Rating :</strong> {this.props.anime.attributes.ageRatingGuide ? this.props.anime.attributes.ageRatingGuide : this.props.anime.attributes.ageRating}</div>
                       </div>
                     </div>
                   }
@@ -66,31 +66,31 @@ class AnimeInfo extends Component {
                     <div className='d-flex justify-content-between'>
                       <div>
                         <div className='d-flex align-items-center'>
-                          <p className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</p>
+                          <div className={`bold_text ${this.props.smDown ? 'anime-title-mobile' : 'anime-title'}`}>{this.props.anime.attributes.titles.en ? this.props.anime.attributes.titles.en : this.props.anime.attributes.titles.en_jp}</div>
                           {!this.props.smDown ? this.props.user ?
                             <FavoriteIcon isFromSelectedAnime={true} animeId={this.props.anime.id} />
                             : null
                             : null}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', paddingTop: this.props.smDown ? 0 : 5 }}>
-                          <p className={`bold_text ${this.props.smDown ? 'subtitle-mobile' : 'anime-title'}`} style={{ paddingRight: this.props.smDown ? 3 : 'unset' }}>{rateToFive(this.props.anime.attributes.averageRating)}</p>
+                          <div className={`bold_text ${this.props.smDown ? 'subtitle-mobile' : 'anime-title'}`} style={{ paddingRight: this.props.smDown ? 3 : 'unset' }}>{rateToFive(this.props.anime.attributes.averageRating)}</div>
                           <svg width={this.props.smDown ? '1.5em' : "2em"} height={this.props.smDown ? '1.5em' : "2em"} viewBox="0 0 16 16" className="bi bi-star-fill starIcon ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                           </svg>
                         </div>
                         {this.props.smDown ?
                           <div>
-                            <p className='info-mobile'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</p>
-                            <p className='info-mobile'><strong>Status :</strong> {this.props.anime.attributes.status}</p>
+                            <div className='info-mobile'><strong>Episodes :</strong> {this.props.anime.attributes.episodeCount}</div>
+                            <div className='info-mobile'><strong>Status :</strong> {this.props.anime.attributes.status}</div>
                             <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' target="_blank" href={`https://www.youtube.com/watch?v=${this.props.anime.attributes.youtubeVideoId}`}>
                               <div className='trailer-btn'>
-                                <p style={{ color: 'white', fontSize: 18 }}>Watch trailer</p>
+                                <div style={{ color: 'white', fontSize: 18 }}>Watch trailer</div>
                               </div>
                             </a>
                           </div>
                           : null}
                         {this.props.smDown ? null :
-                          <p className={this.props.smDown ? 'subtitle-mobile' : 'subtitle'}><strong>Favorites count</strong>  :  {this.props.anime.attributes.favoritesCount}</p>
+                          <div className={this.props.smDown ? 'subtitle-mobile' : 'subtitle'}><strong>Favorites count</strong>  :  {this.props.anime.attributes.favoritesCount}</div>
                         }
                       </div>
 
@@ -101,11 +101,11 @@ class AnimeInfo extends Component {
                       }
                     </div>
                     <div style={{ paddingTop: this.props.smDown ? 10 : 30 }}>
-                      <p className='subtitle bold_text'>Synopsis</p>
-                      <p className={this.props.smDown ? 'synopsis-mobile' : 'synopsis'}>{this.props.anime.attributes.description}</p>
+                      <div className='subtitle bold_text'>Synopsis</div>
+                      <div className={this.props.smDown ? 'synopsis-mobile' : 'synopsis'}>{this.props.anime.attributes.description}</div>
                     </div>
                     <div style={{ padding: this.props.smDown ? '15px 0px' : '40px 10px' }}>
-                      <p className='subtitle bold_text'>Related Animes</p>
+                      <div className='subtitle bold_text'>Related Animes</div>
                       <div className='row mx-0 px-0' style={{ padding: '20px 10px' }}>
                         {!this.props.fetching ?
                           this.props.related.map((x, i) => (
@@ -114,10 +114,11 @@ class AnimeInfo extends Component {
                               let categories = x.relationships.categories.data
                               this.props.setRelatedAnimes(categories[Math.floor(Math.random() * categories.length)].id)
                               this.props.history.push(`/Anime/${x.attributes.canonicalTitle}`)
+                              window.scrollTo(0,0)
                             }}
                               key={i} className='col-6 col-md-2' style={{ padding: 10, cursor: 'pointer' }}>
                               <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
-                              <p className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</p>
+                              <div className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</div>
                             </div>
                           ))
                           :

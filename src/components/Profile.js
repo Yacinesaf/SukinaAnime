@@ -34,7 +34,7 @@ class Profile extends Component {
                   }}
                     key={i} className='col-6 col-md-2' style={{ padding: 10, cursor: 'pointer' }}>
                     <img alt='relatedAnime' src={x.attributes.posterImage.small} width={'100%'} />
-                    <p className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</p>
+                    <div className={`bold_text py-2 ${this.props.smDown ? 'related-titles-mobile' : 'related-titles'}`}>{titleFormater(x.attributes.slug)}</div>
                   </div>
                 ))
               }

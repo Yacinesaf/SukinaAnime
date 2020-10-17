@@ -123,7 +123,7 @@ class Animes extends Component {
             {this.pagination(this.props.currentPage, Math.ceil(Number(this.props.animeCount) / 12)).map((x, i) => (
               x === this.props.currentPage ?
                 <div key='currentPage' className='selected white-text'>{x}</div>
-                : <p onClick={(e) => { this.props.setCurrentPage(parseInt(e.target.innerText)); this.props.setAnimes(e.target.innerText); window.scrollTo(0, 0) }} className='white-text mx-3' style={{ fontSize: this.props.smDown ? 14 : 18, cursor: 'pointer' }} key={i}>{x}</p>
+                : <div onClick={(e) => { this.props.setCurrentPage(parseInt(e.target.innerText)); this.props.setAnimes(e.target.innerText); window.scrollTo(0, 0) }} className='white-text mx-3' style={{ fontSize: this.props.smDown ? 14 : 18, cursor: 'pointer' }} key={i}>{x}</div>
             ))}
           </div>
           <svg
