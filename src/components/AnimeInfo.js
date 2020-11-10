@@ -37,6 +37,7 @@ class AnimeInfo extends Component {
   }
 
   render() {
+ console.log(this.props.smDown);
     return (
       <div style={{ paddingTop: this.props.smDown ? 64 : 72 }}>
         {this.props.anime ?
