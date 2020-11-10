@@ -41,7 +41,7 @@ class AnimeInfo extends Component {
       <div style={{ paddingTop: this.props.smDown ? 64 : 72 }}>
         {this.props.anime ?
           <div>
-            {this.props.smDown ?
+            {this.props.smDown && this.props.user ?
               <FavoriteIcon isFromSelectedAnime={true} animeId={this.props.anime.id} smDown={this.props.smDown} />
               : null}
             <div style={{

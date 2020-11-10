@@ -21,7 +21,7 @@ class FavoriteIcon extends Component {
         top: !this.props.isFromSelectedAnime ? 10 : !this.props.smDown ? 'unset' : 80,
         height: 48, padding: 10,
         borderRadius: '100%',
-        backgroundColor: 'rgba(33, 27, 27, 0.4)'
+        backgroundColor: !this.props.smDown ? 'transparent' : 'rgba(33, 27, 27, 0.4)'
       }}
         onClick={(e) => {
           e.stopPropagation()
