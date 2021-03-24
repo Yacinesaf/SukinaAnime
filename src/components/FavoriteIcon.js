@@ -24,7 +24,7 @@ class FavoriteIcon extends Component {
         backgroundColor: !this.props.smDown ? 'transparent' : 'rgba(33, 27, 27, 0.4)'
       }}
         onClick={(e) => {
-          e.stopPropagation()
+          e.preventDefault()
           this.props.favoriteToggler(anime)
         }}>
         {this.props.user ? anime.isFavorite ?

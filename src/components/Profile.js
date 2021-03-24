@@ -17,7 +17,7 @@ class Profile extends Component {
         <div style={{ paddingTop: 72 }}>
           <div className='p-3 p-md-5'>
             <div className='row mx-0 justify-content-center'>
-              <div className='avatar' style={{ cursor: 'none', height: this.props.smDown ? 80 : 160, width: this.props.smDown ? 80 : 160 }}></div>
+              <div className='avatar' style={{ height: this.props.smDown ? 80 : 160, width: this.props.smDown ? 80 : 160, cursor: 'initial' }}></div>
             </div>
             <div className={`row mx-0 ${this.props.fetchingFavorites ? 'justify-content-center' : 'unset'}`} style={{ padding: this.props.smDown ? '40px 0px' : '100px 120px' }}>
               {this.props.fetchingFavorites ?
